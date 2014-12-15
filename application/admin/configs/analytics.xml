@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analytics kind="pro">
+    <category name="" kind="pro">
+        <row>
+            <blocks width="1">
+                <block name="header2" type="title" label="Visits, Pageviews, Visitors"></block>
+            </blocks>
+        </row>
+
+        <row>
+            <blocks width="1">
+                <block name="a" type="lines,vtable" label="Visits">
+                    <line name="Total" source='Repository\Metricsga::{"method": "visits","goal":"visits","platform": "all"}'></line>
+                    <line name="Desktop" source='Repository\Metricsga::{"method": "visits","goal":"visits","platform": "desktop"}'></line>
+                    <line name="Mobile" source='Repository\Metricsga::{"method": "visits","goal":"visits","platform": "mobile"}'></line>
+                </block>
+            </blocks>
+        </row>
+        <row>
+            <blocks width="1">
+                <block name="b" type="lines,vtable" label="Pageviews">
+                    <line name="Total" source='Repository\Metricsga::{"method":"pageview","unique":"false","platform":"all"}'></line>
+                    <line name="Desktop" source='Repository\Metricsga::{"method":"pageview","unique":"false","platform":"desktop"}'></line>
+                    <line name="Mobile" source='Repository\Metricsga::{"method":"pageview","unique":"false","platform":"mobile"}'></line>
+                </block>
+            </blocks>
+        </row>
+        <row>
+            <blocks width="1">
+                <block name="c" type="lines,vtable" label="Unique Visitors">
+                    <line name="Unique Visitors" source='Repository\Metricsga::{"method": "visits","goal":"visitors","platform": "all"}'></line>
+                    <line name="Unique Visitors on Desktop" source='Repository\Metricsga::{"method": "visits","goal":"visitors","platform": "desktop"}'></line>
+                    <line name="Unique Visitors on Mobile" source='Repository\Metricsga::{"method": "visits","goal":"visitors","platform": "mobile"}'></line>
+                </block>
+            </blocks>
+        </row>
+        <row>
+            <blocks width="1">
+                <block name="visitsByBrowser" type="lines,vtable" label="Visits by Browser">
+                    <line name="Visits in Chrome" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser==Chrome"}'></line>
+                    <line name="Visits in IE 11" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser==Internet Explorer;ga:browserVersion==11.0"}'></line>
+                    <line name="Visits in IE 10" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser==Internet Explorer;ga:browserVersion==10.0"}'></line>
+                    <line name="Visits in IE 9" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser==Internet Explorer;ga:browserVersion==9.0"}'></line>
+                    <line name="Visits in IE 8" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser==Internet Explorer;ga:browserVersion==8.0"}'></line>
+                    <line name="Vistis in Safari" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser=@Safari"}'></line>
+                    <line name="Visits in Firefox" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser==Firefox"}'></line>
+                    <line name="Visits in other browsers" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:browser!=Internet Explorer;ga:browser!=Chrome;ga:browser!=Safari;ga:browser!=Safari (in-app);ga:browser!=Firefox"}'></line>
+                </block>
+            </blocks>
+        </row>
+        <row>
+            <blocks width="1">
+                <block name="visitsByOS" type="lines,vtable" label="Visits by OS">
+                    <line name="Visits on Windows" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:operatingSystem==Windows"}'></line>
+                    <line name="Visits on Mac" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:operatingSystem==Macintosh"}'></line>
+                    <line name="Visits on iOS" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:operatingSystem==iOS"}'></line>
+                    <line name="Visits on Android" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:operatingSystem==Android"}'></line>
+                    <line name="Visits on other OSes" source='Repository\Metricsga::{"method": "visits","goal":"visits","filters": "ga:operatingSystem!=Windows;ga:operatingSystem!=Macintosh;ga:operatingSystem!=iOS;ga:operatingSystem!=Android"}'></line>
+                </block>
+            </blocks>
+        </row>
+    </category>
+</analytics>

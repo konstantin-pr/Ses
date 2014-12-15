@@ -1,0 +1,71 @@
+<h1>
+	Home <b>page</b> <i>Desktop</i>
+</h1>
+<p>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel justo vitae libero posuere
+	tincidunt sit amet a turpis. Cras consectetur vehicula tortor non vehicula. Phasellus dignissim
+	diam sed risus condimentum consectetur. Suspendisse ut bibendum lorem. Vestibulum quis sapien blandit,
+	convallis leo fermentum, euismod libero. In hac habitasse platea dictumst. In a auctor nisi,
+	adipiscing ullamcorper dolor. Praesent elementum, lacus vitae tempus pharetra, elit lectus convallis nunc,
+	ut imperdiet metus erat sit amet purus. Cum sociis natoque penatibus et magnis dis parturient montes,
+	nascetur ridiculus mus. Etiam luctus ullamcorper tristique. Pellentesque venenatis arcu eget arcu
+	condimentum, vel egestas metus vestibulum. Nulla eu elit in nunc imperdiet tincidunt id quis nibh.
+	Nam iaculis dui vitae ipsum molestie, vitae pharetra magna volutpat. Nunc mollis est diam,
+	ut dictum augue auctor vel.
+</p>
+
+<a 
+    href="javascript:void(0)"
+    title="Twitter Share"
+    app-tw-share="true"
+    data-shortener="bitly"
+    data-url="http://stuzo.com"
+    data-text="Twitt test"
+    data-hashtags=""
+>
+    Twitter Share
+</a>
+ -
+<a 
+    href="javascript:void(0)"
+    title="Facebook Share"
+    app-fb-share="true"
+    data-link="http://stuzo.com"
+    data-description="Facebook test"
+>
+    Facebook Share
+</a>
+-
+<a 
+    href="javascript:void(0)"
+    title="Facebook Login"
+    ng-click="facebook.login('email user_photos')"
+>
+    Facebook Login
+</a>
+-
+<a 
+    href="javascript:void(0)"
+    title="Login LinkedIn"
+    ng-click="loginLinkedin()"
+>
+    LinkedIn Login
+</a>
+
+
+<div class="clearfix">
+    <div app-video="4Kvd-uquuhI" data-provider="youtube" data-autoplay="1" data-cover="1" style="background-color:#000;color:#fff;text-align:center;width:270px;height:200px;cursor:pointer;margin:10px 0;float:left;">
+        <h2 style="padding:35% 0;">Play Youtube!</h2>
+    </div>
+    <div app-video="hFMUAj3gigq" data-provider="vine" data-autoplay="1" data-cover="1" style="background-color:#000;color:#fff;text-align:center;width:270px;height:200px;cursor:pointer;margin:10px 0;float:left;">
+        <h2 style="padding:35% 0;">Play Vine!</h2>
+    </div>
+    <div app-video="21979385" data-provider="vimeo" data-autoplay="1" data-cover="1" style="background-color:#000;color:#fff;text-align:center;width:800px;height:600px;cursor:pointer;margin:10px 0;float:left;">
+        <h2 style="padding:35% 0;">Play Vimeo!</h2>
+    </div>    
+</div>
+
+<a href="#/about">About</a> |
+<a href="#/gallery/1/all/recent">Gallery</a> |
+<a href="javascript:void(0)" track="track2">Track Me</a> |
+<a href="javascript:void(0)" ng-click="popup.show('alert.html', 'Hello World', {isFocusable:true})">Popup</a>

@@ -1,0 +1,11 @@
+<phpunit
+    colors="true"
+    strict="true"
+    verbose="true"
+    >
+    <testsuites>
+        <testsuite name="Go Fish Test Suite">
+              <file>./application/test/DBTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>

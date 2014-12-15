@@ -1,0 +1,4 @@
+<script>
+    var p = (function(u){var r={};u.replace(/[?&]+([^=&]+)=([^&]*)/g,function(s,k,v){r[k]=decodeURIComponent(decodeURI(v));});return r;})(document.location.href.split('#')[0]);
+    document.write('<script src="//connect.facebook.net/' + (p.locale || 'en_US') + '/all.js"></' + 'script>');
+</script>

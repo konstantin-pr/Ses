@@ -1,0 +1,21 @@
+AddType text/x-component .htc
+AddDefaultCharset utf-8
+
+<IfModule mod_headers.c>
+Header set P3P "CP=\"NOI DSP COR ADM DEVi OUR IND COM\""
+SetEnv SENT_P3P_HEADER 1
+#allow add our app to iframe
+Header unset X-Frame-Options
+Header unset X-Content-Security-Policy
+</IfModule>
+
+RewriteEngine On
+
+#Block denied file extensions
+RewriteRule \.(bak|config|sql|fla|psd|ini|log|sh|inc|~|swp)$ - [F,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [L]
+RewriteRule .* /index.php [L]

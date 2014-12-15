@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+/**
+ * @example cron-cli.php '[{"task":"Test","env":"development"},{"task":"Test","curl":1}]'
+ * requere task
+ * optional curl,env ... your params
+ */
+
+require __DIR__.'/../../vendor/autoload.php';
+
+$tasks = @json_decode($_SERVER['argv'][1]);
+//is_null($tasks) && die('empty task');
+defined('APPLICATION_ENV') || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
+!defined('SERVER_SCRIPT') && define('SERVER_SCRIPT', 'cron');
+
+\Slim\Environment::mock();
+$app = \Application\Bootstrap::init();
+is_null($tasks) && ($tasks = @json_decode($app->config['cron']['tasks']));
+is_null($tasks) && die('empty task');
+
+
+foreach ($tasks as $task) {
+    empty($task->env) && ($task->env = APPLICATION_ENV);
+    try {
+        if(empty($task->task)) throw new \Exception('task can not be empty');
+        $app->config = \Library\Config::getConfig($task->env);
+        $app->log->info("Cron start task:{$task->task}");
+        $cronClass = '\Cron\\'.$task->task;
+        $cronClass::$task = $task;
+        $cronClass = new $cronClass();
+        $buffer = '';
+        if (!empty($task->curl)) {
+            $buffer = $cronClass->runViaUrl();
+        } else {
+            ob_start();
+            $buffer = $cronClass->run();
+            $buffer .= ob_get_clean();
+        }
+        !empty($buffer) && $app->log->debug("Cron task:{$task->task} log:".$buffer );
+        $app->log->info("Cron end task:{$task->task}");
+    } catch (\Exception $e) {
+        $app->log->error($e);
+    }
+}

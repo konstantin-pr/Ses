@@ -1,0 +1,9 @@
+<script>
+    var state = (/[?&#]+state=([^&#]*)/.exec(document.location) || [])[1] || '';
+    var protocol = (state.split('_')[0] || 'http') + ':';
+    if(protocol != document.location.protocol){
+        document.location.protocol = protocol;
+    }else{
+        try{window.opener[state](document.location.href)}catch(e){window.close();}
+    };
+</script>

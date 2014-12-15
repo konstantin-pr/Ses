@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../../vendor/autoload.php';
+$task = '';
+$param = '';
+$env = '';
+
+if (isset($_SERVER['argv']) && is_array($_SERVER['argv'])) {
+
+    foreach ($_SERVER['argv'] as $key => $data) {
+        if (!strstr($data, ":"))
+            continue;
+
+        list($name, $value) = explode(':', $data);
+        
+        switch (trim($name)) {
+            case 'task':
+                $task = trim($value);
+                break;
+            case 'env':
+                $env = trim($value);
+                break;    
+            case 'param':
+                $param = trim($value);
+                $param = str_replace('"', '', $param);
+                break;
+        }
+    }
+}
+
+define('CRON_SPECIFIC_TASK', $task);
+define('CRON_SPECIFIC_PARAM', $param);
+
+\Slim\Environment::mock();
+$app = \Application\Bootstrap::init();
+
+$app->log->info("Cron start task:{$task}");
+$cronClass = '\Cron\\'.$task;
+$cronClass = new $cronClass($app);
+$cronClass->run($app);
+$app->log->info("Cron end task:{$task}");

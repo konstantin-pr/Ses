@@ -1,0 +1,30 @@
+<h1>
+	Gallery <b>page</b> <i>Desktop</i>
+</h1>
+<p>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel justo vitae libero posuere
+	tincidunt sit amet a turpis. Cras consectetur vehicula tortor non vehicula. Phasellus dignissim
+	diam sed risus condimentum consectetur. Suspendisse ut bibendum lorem. Vestibulum quis sapien blandit,
+	convallis leo fermentum, euismod libero. In hac habitasse platea dictumst.
+</p>
+<div class="gallery">
+    <div class="bar">
+        <div class="filter">
+            <a ng-href="#/gallery/1/all/{{options.sort}}" ng-class="{active:options.filter=='all'}" title="All images"><span>All images</span></a>
+            <a ng-href="#/gallery/1/my/{{options.sort}}" ng-class="{active:options.filter=='my'}" title="My images"><span>My images</span></a>
+        </div>
+        <div class="pages">
+            <a ng-if="prevRange.length" ng-href="#/gallery/{{page - 1}}/{{options.filter}}/{{options.sort}}">Prev</a>
+            <a ng-repeat="p in prevRange" ng-href="#/gallery/{{p}}/{{options.filter}}/{{options.sort}}">{{p}}</a>
+            <span ng-if="pages>1">{{page}}</span>
+            <a ng-repeat="p in nextRange" ng-href="#/gallery/{{p}}/{{options.filter}}/{{options.sort}}">{{p}}</a>
+            <a ng-if="nextRange.length" ng-href="#/gallery/{{page + 1}}/{{options.filter}}/{{options.sort}}">Next</a>
+        </div>
+    </div>
+    <ul class="list clearfix">
+        <li class="entry" ng-repeat="entry in list" ng-click="popup.show('alert.html', '<img src='+entry.src+' />')">
+            <img ng-src="{{entry.src}}" alt="" />
+        </li>
+    </ul>
+</div>
+<a href="#/about">About</a>

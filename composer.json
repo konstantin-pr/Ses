@@ -1,0 +1,23 @@
+{
+    "autoload": {
+        "psr-4": 
+            {
+                "Application\\": "application/" ,
+                "Entity\\": "application/models/Entity",
+                "Repository\\": "application/models/Repository",
+                "Library\\": "library",
+                "Cron\\": "cron"
+            },
+            "psr-0": {
+                "DB": "application"
+            }
+    },
+    "require": {
+        "slim/slim": "2.4.*",
+        "doctrine/orm": "2.4.4",
+        "facebook/php-sdk": "@stable",
+        "monolog/monolog": "1.6.0",
+        "slim/extras": "dev-master",
+        "dandydev/gapi-php": "dev-master"
+    }
+}

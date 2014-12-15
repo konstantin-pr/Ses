@@ -1,0 +1,8 @@
+<script>
+    var p = (function(u){var r={};u.replace(/[?&]+([^=&]+)=([^&]*)/g,function(s,k,v){r[k]=decodeURIComponent(decodeURI(v));});return r;})(document.location.href.split('#')[0]); p.protocol = p.state.split('_')[0] + ':';
+    if(p.protocol != document.location.protocol){
+        document.location.protocol = p.protocol;
+    }else{
+        try{window.opener[p.state](window.location.hash.replace('#access_token=', ''))}catch(e){window.close();}
+    };
+</script>

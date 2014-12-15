@@ -1,0 +1,37 @@
+<p>The project <strong><%= application.capitalize %></strong> is successfully deployed to <strong><%= stage %></strong> environment.</p>
+
+<% note ||= '' %>
+<% if !note.empty? %>
+  <p>
+    Note: <%= note %>
+  </p>
+<% end %>
+
+<table border="1">
+  <tbody>
+    <tr>
+      <td>Github repo</td>
+      <td>
+        <a href="<%= repository %>"><%= repository %></a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Branch</td>
+      <td><strong><%= branch %></strong></td>
+    </tr>
+
+    <tr>
+      <td>Environment</td>
+      <td><strong><%= stage %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>Do not reply to this email.</p>
+
+<p>
+  Yours sincerely,<br/>
+  Stuzo Deployment Bot 
+</p>
