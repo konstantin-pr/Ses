@@ -74,15 +74,15 @@
 <script type="text/javascript" src="/js/lib/angular/angular.js"></script>
 <script type="text/javascript" src="/js/lib/angular/angular-route.js"></script>
 <script type="text/javascript" src="/js/lib/angular/angular-animate.js"></script>
-<script type="text/javascript" src="/js/lib/angular/angular-resource.js"></script>
-<script type="text/javascript" src="/js/lib/angular/angular-mocks.js"></script>
+<!--<script type="text/javascript" src="/js/lib/angular/angular-resource.js"></script>-->
+<!--<script type="text/javascript" src="/js/lib/angular/angular-mocks.js"></script>-->
 <!-- endbuild -->
 
 <script type="text/javascript">
 window.appConfig = <?php echo H::vars(true); ?>;
 window.appModules = function(){
     var l = Array.prototype.slice.call(arguments, 0), i = 0;
-    l = l.length ? l : ['ngRoute', 'ngAnimate', 'ngTouch', 'ngResource', 'ngMockE2E'];
+    l = l.length ? l : ['ngRoute', 'ngAnimate', 'ngResource'];
     while(i < l.length){try{angular.module(l[i]); i++}catch(e){l.splice(i, 1);};};
     return l;
 };
@@ -101,14 +101,15 @@ angular.extend(window.appConfig.fb, {
 <!-- build:js /js/bin/app.min.js -->
 <script type="text/javascript" src="/js/lib/analytics.js"></script>
 <script type="text/javascript" src="/js/lib/application.js"></script>
-<script type="text/javascript" src="/js/lib/facebook.js"></script>
-<script type="text/javascript" src="/js/lib/oauth.js"></script>
+<script type="text/javascript" src="/js/lib/video.js"></script>
+<!--<script type="text/javascript" src="/js/lib/facebook.js"></script>-->
+<!--<script type="text/javascript" src="/js/lib/oauth.js"></script>-->
 
 <script type="text/javascript" src="/js/controllers.js"></script>
 <script type="text/javascript" src="/js/instance.js"></script>
 <script type="text/javascript" src="/js/metrics.js"></script>
 <script type="text/javascript" src="/js/services.js"></script>
-<script type="text/javascript" src="/js/mock/mock.js"></script>
+<!--<script type="text/javascript" src="/js/mock/mock.js"></script>-->
 <!-- endbuild -->
 <?php H::vars()->fb->debug && H::debug(); ?>
 
