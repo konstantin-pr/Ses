@@ -1,0 +1,7 @@
+# IntelliJ
+*.iml
+*.ipr
+.idea
+.DS_Store
+atlassian-ide-plugin.xml
+examples/config.php
