@@ -201,8 +201,10 @@ div[app-video]{
 }
 
 .notice{
-	font-size: 10px;
-	margin: 35px auto 10px;
+	font-size: 9px;
+	line-height: 11px;
+	margin: 35px 0 10px 18px;
+	text-align: left;
 }
 
 .logo{
@@ -215,15 +217,12 @@ div[app-video]{
 }
 
 .footer{
-	height: 39px;
+	height: 122px;
 	line-height: 40px;
 	background-color: #0081c6;
 }
-.app-route-entry .footer{
-	height: 122px;
-}
-.app-route-entry #view{
-	padding-bottom: 275px;
+.app-route-home .footer{
+	height: 39px;
 }
 
 .footer a{
@@ -243,7 +242,10 @@ div[app-video]{
 .top-area{
 	height: 272px;
 	box-shadow: inset 0 -5px 5px -2px rgba(31,63,100,1);
-	background: #0081c6 url(../img/products.png) no-repeat center;
+	background-color: #0081c6;
+}
+.top-area img{
+	margin-top: 9px;
 }
 
 h1{
@@ -252,6 +254,7 @@ h1{
 }
 
 .top-area + h1{
+	margin-bottom: 30px;
 	padding-top: 45px;
 	box-shadow: inset 0 5px 5px -5px rgba(79,79,87,1);
 }
@@ -308,7 +311,6 @@ form input, form select{
 	box-shadow: none;
 	background: #ffffff;
 	box-sizing: border-box;
-	/*-webkit-appearance: none;*/
 }
 form label input{
 	float: right;
@@ -349,4 +351,43 @@ form label.checkbox input{
 }
 form .btn{
 	margin-top: 40px;
+}
+
+/*products*/
+.app-route-products .top-area{
+	height: 138px;
+}
+.app-route-products h1{
+	padding-top: 17px;
+}
+.product{
+	text-align: left;
+	margin: 40px auto;
+	padding: 0 55px 0 130px;
+}
+.product > div{
+	display: inline-block;
+}
+.product .img-wrapper{
+	width: 130px;
+	text-align: center;
+}
+.product .description{
+	float: right;
+}
+.product .description h4{
+	margin-top: 30px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.product .description p{
+	font-size: 16px;
+	margin: 0 auto;
+	width: 448px;
+}
+.product .description p + p{
+	margin-top: 75px;
+}
+.app-route-products .btn{
+	margin: 40px auto 64px;
 }
