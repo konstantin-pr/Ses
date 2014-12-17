@@ -14,7 +14,9 @@
     $scope.years = $tools.getRange(2014, 1914);
 
     $scope.submitEntry = function(entry) {
-        console.log(entry);
+        angular.forEach(entry, function(value, key) {
+            console.log(key + ': ' + value);
+        });
         //$http.post('/entry', entry).then(function(response) {
         //    console.log(response);
         //});

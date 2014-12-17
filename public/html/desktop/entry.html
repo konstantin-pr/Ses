@@ -25,7 +25,7 @@
     <label class="checkbox"><input type="checkbox" ng-model="rules"/>I agree to the rules of this sweepstake</label>
     <label class="checkbox"><input type="checkbox" ng-model="receiveEmails"/>Yes I would like to receive an email from P&G</label>
     <button class="btn" type="submit"
-            ng-click="submitEntry({firstName:firstName,lastName:lastName,email:email,birthDate:month+' '+year,terms:terms,rules:rules,receiveEmails:receiveEmails})">submit my details</button>
+            ng-click="submitEntry({firstName:firstName,lastName:lastName,email:email,birthDate:month+' '+year,terms:!!terms,rules:!!rules,receiveEmails:!!receiveEmails})">submit my details</button>
 </form>
 
 <div class="logo"></div>
