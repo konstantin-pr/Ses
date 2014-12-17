@@ -12,7 +12,7 @@
 
     $routeProvider
     .when('/home', {templateUrl: '/html/' + $agent.device + '/home.html'})
-    .when('/reg', {templateUrl: '/html/' + $agent.device + '/reg.html'})
+    .when('/entry', {templateUrl: '/html/' + $agent.device + '/entry.html', controller: 'entry'})
     .when('/products', {templateUrl: '/html/' + $agent.device + '/products.html'})
     .when('/final', {templateUrl: '/html/' + $agent.device + '/final.html'})
     .when('/thanks', {templateUrl: '/html/' + $agent.device + '/thanks.html'})

@@ -1,0 +1,35 @@
+<div class="top-area"></div>
+
+<h1>Enter below</h1>
+
+<ol>
+    <li><span>1</span>Sign up below</li>
+    <li><span>2</span>Receive discount offer via email</li>
+    <li><span>3</span>Buy and use any item in the Oral-B Clinical range</li>
+    <li><span>4</span>Hold onto your receipt to redeem prize</li>
+</ol>
+<p>In addition to the major prize of a backyard cricket match with Michael Clarke, we’re giving away 100 Oral-B Clinical
+    Starter Kits valued at $100.</p>
+
+<form name="entry">
+    <label>First name<input type="text" ng-model="firstName"/></label>
+    <label>Last name<input type="text" ng-model="lastName"/></label>
+    <label>Email<input type="email" ng-model="email"/></label>
+    <label class="birth">DOB
+        <span>
+            <select ng-model="month" id="month" ng-options="m for m in months" ng-init="month='Jan'"></select>
+            <select ng-model="year" id="year" ng-options="y for y in years" ng-init="year=1970"></select>
+        </span>
+    </label>
+    <label class="checkbox"><input type="checkbox" ng-model="terms"/>I agree to the P&G Terms and Conditions</label>
+    <label class="checkbox"><input type="checkbox" ng-model="rules"/>I agree to the rules of this sweepstake</label>
+    <label class="checkbox"><input type="checkbox" ng-model="receiveEmails"/>Yes I would like to receive an email from P&G</label>
+    <button class="btn" type="submit"
+            ng-click="submitEntry({firstName:firstName,lastName:lastName,email:email,birthDate:month+' '+year,terms:terms,rules:rules,receiveEmails:receiveEmails})">submit my details</button>
+</form>
+
+<div class="logo"></div>
+<div class="footer">
+    <a href="#/products">view product range</a>
+    <a class="terms" href="javascript:void(0)" ng-click="popup.show('terms.html',0,{isFocusable:1})">terms and conditions</a>
+</div>

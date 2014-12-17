@@ -1,14 +1,14 @@
-html{ width:100%; height:100%; background-color:#ffffff; }
+html{ width: 100%; height: 100%; background-color: #ffffff; }
 body{
-	font-size:12px;
-	font-family:sans-serif;
+	font-size: 12px;
+	font-family: sans-serif;
 	color: #000000;
 	background-color: #ffffff;
-	line-height:1.3;
-	position:relative;
-	overflow-x:hidden!important;
-	min-height:100%;
-	-webkit-text-size-adjust:none;
+	line-height: 1.3;
+	position: relative;
+	overflow-x: hidden!important;
+	min-height: 100%;
+	-webkit-text-size-adjust: none;
 }
 a{ text-decoration:none; color: #ffffff; -webkit-tap-highlight-color:transparent; }
 html.app-loading{ background:#ffffff url(/img/app-loading.gif) no-repeat center center; }
@@ -29,10 +29,10 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	width:100%;
 	position:absolute;
 	z-index:1;
-    background-color:transparent;
-    background-color:rgba(255,255,255,0.8);
-    background-image:url(/img/empty.png);
-    zoom:1;
+	background-color:transparent;
+	background-color:rgba(255,255,255,0.8);
+	background-image:url(/img/empty.png);
+	zoom:1;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF,endColorstr=#CCFFFFFF);
 	display:none;
 }
@@ -53,17 +53,17 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 
 /* POPUP */
 .popup{
-    position:absolute;
-    left:0;
-    top:0;
-    right:0;
-    min-height:100%;
-    text-align:center;
-    background-color:transparent;
-    background-color:rgba(255,255,255,0.8);
-    background-image:url(/img/empty.png);
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	min-height:100%;
+	text-align:center;
+	background-color:transparent;
+	background-color:rgba(255,255,255,0.8);
+	background-image:url(/img/empty.png);
 	zoom:1;
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF,endColorstr=#CCFFFFFF);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF,endColorstr=#CCFFFFFF);
 }
 .popup-shadow{
 	display:inline-block;
@@ -97,7 +97,7 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 #view{
 	text-align: center;
 	color: #ffffff;
-	background-color:#0d4a91;
+	background-color: #0d4a91;
 }
 
 .landing-top-img{
@@ -116,11 +116,13 @@ p{
 	position: relative;
 	display: inline-block;
 	box-sizing: border-box;
-	padding-right: 30px;
+	padding: 0 30px 0 0;
 	width: 495px;
 	height: 66px;
 	line-height: 66px;
 	text-transform: uppercase;
+	color: #ffffff;
+	border: 0;
 	background: url(../img/btn.png) no-repeat center;
 }
 .btn:after{
@@ -169,10 +171,25 @@ div[app-video]{
 	margin: 35px auto 10px;
 }
 
+.logo{
+	position: absolute;
+	top: 25px;
+	left: 18px;
+	width: 111px;
+	height: 39px;
+	background: url(../img/logo.png) no-repeat center;
+}
+
 .footer{
 	height: 39px;
 	line-height: 40px;
 	background-color: #0081c6;
+}
+.app-route-entry .footer{
+	height: 122px;
+}
+.app-route-entry #view{
+	padding-bottom: 275px;
 }
 
 .footer a{
@@ -186,4 +203,98 @@ div[app-video]{
 .footer a.terms{
 	float: right;
 	font-weight: normal;
+}
+
+/*entry*/
+.top-area{
+	height: 272px;
+	box-shadow: inset 0 -5px 5px -2px rgba(31,63,100,1);
+	background: #0081c6 url(../img/products.png) no-repeat center;
+}
+
+h1{
+	font-size: 37px;
+	padding-top: 45px;
+	text-transform: uppercase;
+	box-shadow: inset 0 5px 5px -5px rgba(79,79,87,1);
+}
+
+ol{
+	font-size: 17px;
+	margin: 30px auto 20px;
+	max-width: 420px;
+	text-align: left;
+}
+ol li span{
+	display: inline-block;
+	margin-right: 11px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #ffffff;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.app-route-entry p{
+	font-size: 17px;
+	max-width: 604px;
+}
+
+form{
+	padding: 45px 74px;
+}
+
+form label{
+	font-size: 20px;
+	display: block;
+	margin-bottom: 18px;
+	text-align: left;
+	text-transform: uppercase;
+	vertical-align: middle;
+	line-height: 34px;
+	height: 34px;
+}
+form label input{
+	font-size: 20px;
+	float: right;
+	width: 470px;
+	height: 34px;
+	box-sizing: border-box;
+}
+
+form label.birth{
+	margin-bottom: 20px;
+}
+form label.birth > span{
+	display: inline-block;
+	width: 470px;
+	float: right;
+}
+form label.birth span select{
+	font-size: 16px;
+	padding-left: 6px;
+	width: 171px;
+	height: 34px;
+	vertical-align: top;
+	text-transform: uppercase;
+}
+form label.birth span select:first-child{
+	margin-right: 14px;
+}
+
+form label.checkbox{
+	font-size: 12px;
+	margin: 0;
+	float: right;
+	width: 470px;
+}
+form label.checkbox input{
+	float: none;
+	margin: 0 14px 0 0;
+	vertical-align: middle;
+	width: 21px;
+	height: 21px;
+}
+form .btn{
+	margin-top: 40px;
 }

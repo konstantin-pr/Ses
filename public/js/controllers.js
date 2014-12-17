@@ -3,21 +3,24 @@
 (window.app || (window.app = angular.module('app', [])))
 //------------------------------------------------------ start
 
-.controller('gallery', ['$injector', '$scope', 'entrys', function($injector, $scope, entrys){
+.controller('entry', ['$injector', '$scope', function($injector, $scope){
     var
     $config    = $injector.get('config'),
-    $tools     = $injector.get('tools'),
-    $gallery   = $injector.get('gallery');
-    
-    $scope.options = entrys.options;
-    $scope.list = entrys.list;
-    $scope.perPage = 6;
-    $scope.pageCount = 3;
-    $scope.pages = Math.ceil($scope.options.total / $scope.perPage);
-    $scope.page = ($scope.options.offset / $scope.perPage >> 0) + 1;
-    $scope.prevRange = ($scope.page > 1 ? $tools.getRange($scope.page - 1, Math.max(1, $scope.page - $scope.pageCount)) : []).reverse();
-    $scope.nextRange = $scope.page < $scope.pages ? $tools.getRange($scope.page + 1, Math.min($scope.pages, $scope.page + $scope.pageCount)) : [];
-}])
+    $rootScope = $injector.get('$rootScope'),
+    $http      = $injector.get('$http'),
+    $tools     = $injector.get('tools');
+
+    $scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $scope.years = $tools.getRange(2014, 1914);
+
+    $scope.submitEntry = function(entry) {
+        console.log(entry);
+        //$http.post('/entry', entry).then(function(response) {
+        //    console.log(response);
+        //});
+    };
+
+}]);
 
 //------------------------------------------------------ end
 }(angular);
