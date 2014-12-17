@@ -14,7 +14,8 @@
     .when('/home', {templateUrl: '/html/' + $agent.device + '/home.html'})
     .when('/entry', {templateUrl: '/html/' + $agent.device + '/entry.html', controller: 'entry'})
     .when('/products', {templateUrl: '/html/' + $agent.device + '/products.html'})
-    .when('/final', {templateUrl: '/html/' + $agent.device + '/final.html'})
+    .when('/final1', {templateUrl: '/html/' + $agent.device + '/final1.html'})
+    .when('/final2', {templateUrl: '/html/' + $agent.device + '/final2.html'})
     .when('/thanks', {templateUrl: '/html/' + $agent.device + '/thanks.html'})
     .otherwise({redirectTo: '/home'});
 }])

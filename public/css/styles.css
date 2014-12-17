@@ -429,3 +429,12 @@ form .btn{
 .app-route-thanks .share.tw{
 	margin-bottom: 57px;
 }
+
+/*final*/
+[class*="app-route-final"] h1{
+	margin: 50px auto 30px;
+}
+
+[class*="app-route-final"] p + p + p{
+	margin-top: 50px;
+}
