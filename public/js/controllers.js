@@ -17,9 +17,9 @@
         angular.forEach(entry, function(value, key) {
             console.log(key + ': ' + value);
         });
-        //$http.post('/entry', entry).then(function(response) {
-        //    console.log(response);
-        //});
+        $http.post('/registration', entry).then(function(response) {
+            console.log(response);
+        });
     };
 
 }]);
