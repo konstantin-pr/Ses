@@ -3,9 +3,8 @@
         "/css/bin/min.css": ["/css/reset.css", "/css/styles.css"]
     },
     "app": {
-        "/js/bin/lib.js": ["/js/lib/analytics.js", "/js/lib/application.js", "/js/lib/facebook.js"],
-        "/js/bin/min.js": ["/js/*"],
-        "/js/bin/mock.js": ["/js/mock/*"]
+        "/js/bin/lib.js": ["/js/lib/analytics.js", "/js/lib/application.js"],
+        "/js/bin/min.js": ["/js/*"]
     },
     "debug": {
         "/css/bin/debug.css": "/css/debug.css",
@@ -14,8 +13,7 @@
     "angular": {
 		"//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js" : "//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.js",
 		"//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js" : "//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.js",
-        "//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js" : "//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.js",
-		"//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-mocks.js" : "//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-mocks.js"
+        "//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js" : "//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.js"
     },
     "angularOffline": {
 		"/js/lib/angular/angular.min.js" : "/js/lib/angular/angular.js",

@@ -74,8 +74,6 @@
 <script type="text/javascript" src="/js/lib/angular/angular.js"></script>
 <script type="text/javascript" src="/js/lib/angular/angular-route.js"></script>
 <script type="text/javascript" src="/js/lib/angular/angular-animate.js"></script>
-<!--<script type="text/javascript" src="/js/lib/angular/angular-resource.js"></script>-->
-<!--<script type="text/javascript" src="/js/lib/angular/angular-mocks.js"></script>-->
 <!-- endbuild -->
 
 <script type="text/javascript">
@@ -102,14 +100,11 @@ angular.extend(window.appConfig.fb, {
 <script type="text/javascript" src="/js/lib/analytics.js"></script>
 <script type="text/javascript" src="/js/lib/application.js"></script>
 <script type="text/javascript" src="/js/lib/video.js"></script>
-<!--<script type="text/javascript" src="/js/lib/facebook.js"></script>-->
-<!--<script type="text/javascript" src="/js/lib/oauth.js"></script>-->
 
 <script type="text/javascript" src="/js/controllers.js"></script>
 <script type="text/javascript" src="/js/instance.js"></script>
 <script type="text/javascript" src="/js/metrics.js"></script>
 <script type="text/javascript" src="/js/services.js"></script>
-<!--<script type="text/javascript" src="/js/mock/mock.js"></script>-->
 <!-- endbuild -->
 <?php H::vars()->fb->debug && H::debug(); ?>
 

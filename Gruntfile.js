@@ -15,24 +15,24 @@ module.exports = function (grunt) {
                 app: [
                     'public/js/lib/application.js',
                     'public/js/lib/analytics.js',
-                    'public/js/lib/facebook.js',
-                    'public/js/mock/mock.js',
+                    //'public/js/lib/facebook.js',
+                    //'public/js/mock/mock.js',
                     'public/js/*.js'
                 ],
                 lib: [
                     'public/js/lib/angular/angular.js',
                     'public/js/lib/angular/angular-route.js',
-                    'public/js/lib/angular/angular-touch.js',
-                    'public/js/lib/angular/angular-animate.js',
-                    'public/js/lib/angular/angular-resource.js',
-                    'public/js/lib/angular/angular-mocks.js'
+                    //'public/js/lib/angular/angular-touch.js',
+                    //'public/js/lib/angular/angular-resource.js',
+                    //'public/js/lib/angular/angular-mocks.js'
+                    'public/js/lib/angular/angular-animate.js'
                 ],
                 dist: 'public/js/bin'
             },
             css: {
                 app: 'public/css/styles.css',
                 lib: [
-                    'public/css/reset.css',
+                    'public/css/reset.css'
                 ],
                 dist: 'public/css/bin'
             },
