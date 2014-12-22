@@ -1,10 +1,10 @@
 # Name of application. Will be used as folder name
 # set :application, "capistranotest"
-set :application, "template"
+set :application, "oralb"
 
 # Github repository
 
-set :repository,  "git@bitbucket.org:stuzo/app-template.git"
+set :repository,  "git@bitbucket.org:stuzo/pg-oralb-tb-challenge.git"
 
 # Version of Stuzo library used in this project, e.g. "0.6.0"
 set :stuzo_lib, "0.7.0"
