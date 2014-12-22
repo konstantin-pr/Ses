@@ -8,6 +8,7 @@
     $config    = $injector.get('config'),
     $rootScope = $injector.get('$rootScope'),
     $http      = $injector.get('$http'),
+    $location  = $injector.get('$location'),
     $tools     = $injector.get('tools');
 
     $scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -34,7 +35,15 @@
             receiveEmails: !!entry.receiveEmails
         };
         $http.post('/registration', user).then(function(response) {
-            console.log(response);
+            if (!response || !response.data.success || response.data.error) {
+                $rootScope.popup.show('alert.html', '<h1>Sorry</h1><p>' + ((response && response.data && response.data.error && response.data.error.message) ? response.data.error.message : 'Something went wrong.') + '</p>', {isFocusable: true});
+                return;
+            }
+            switch (response.data.data.status) {
+                case 'winner': $location.path('final1'); break;
+                case 'not_a_winner': $location.path('final2'); break;
+                case 'already_registered': $location.path('thanks'); break;
+            }
         });
     };
 
