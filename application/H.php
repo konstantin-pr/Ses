@@ -363,7 +363,7 @@ SAVVIS;
         try {
             $app_settings = $repository->findOneBy(array('name' => 'app'));
             if ($app_settings) {
-                $app_config->$app_settings->getConfig();
+                $app_config=$app_settings->getConfig();
             }
             else{
                 return false;
@@ -371,7 +371,7 @@ SAVVIS;
         } catch (\Exception $e){//if no config is present
             return false;
         }
-        
+
         $app_config = json_decode($app_config, true);
         if ($app_config && array_key_exists('videoURL', $app_config) && $app_config['videoURL'] != NULL) {
             return $app_config['videoURL'];
