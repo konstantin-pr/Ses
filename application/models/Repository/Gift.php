@@ -9,5 +9,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class Gift extends Base
 {
+	public function winnerPopulate($start_date, $end_date, $gifts_per_day=2){
+
+	}
 
 }
