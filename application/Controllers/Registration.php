@@ -114,23 +114,25 @@ class Registration
 				}
 
 				$user['is_winner'] = false;
-				//$em->beginTransaction();
 				try {
 					$repoUser->update($user);
 					$em->flush();
-					//$em->commit();
-					//mysql read lock$user->flush();
 				} catch (\Exception $e) {
 					if ($e instanceof  \PDOException && $e->getCode() === '23000'){
 						if( preg_match( ".*Duplicate entry.*", $e->getMessage())) {
-							$email = trim($request->post('email'));
-							throw new PublicException("Email address $email is already used.");
+							$res = array(
+								'status' => 'already_registered'
+							);
+							JsonResponse::success($res);
+							//$email = trim($request->post('email'));
+							//throw new PublicException("Email address $email is already used.");
 						}
 					} else {
 						$ep = $e->getPrevious();
+						//die(var_dump($e->getMessage()));
 						if ($ep && $ep instanceof \PDOException && $ep->getCode() === '23000'){
 							if( preg_match( "/.*Duplicate entry.*/", $ep->getMessage())) {
-								$email = trim($request->post('email'));
+								//$email = trim($request->post('email'));
 								$res = array(
 									'status' => 'already_registered'
 								);
@@ -139,7 +141,8 @@ class Registration
 							}
 						}
 					}
-					throw $e;
+					JsonResponse::error($e);
+					//throw $e;
 				}
 
 				$is_winner = $this->checkWinner($user);
@@ -151,7 +154,7 @@ class Registration
 				}
 				else {
 					$res = array(
-    	            	'status' => 'not_winner'
+    	            	'status' => 'not_a_winner'
         	    	);					
 				}
 				JsonResponse::success($res);
@@ -178,8 +181,6 @@ class Registration
      */
     protected function checkWinner($user)
     {
-    	//App::$inst->em
- 	    //$em = \DB::em();
 	    $query = App::$inst->em->createQuery("SELECT gift FROM Entity\Gift gift where gift.winning_time < :time_to_check 
 	    																	and gift.winning_time >= CURRENT_DATE() 
 	    																	and gift.winning_time < DATE_ADD(CURRENT_DATE(),1, 'day') 
@@ -199,7 +200,6 @@ class Registration
 						App::$inst->em->flush();
 						App::$inst->em->commit();
 						return true;
-						//break;
 					}
 					else {
 						App::$inst->em->rollback();
