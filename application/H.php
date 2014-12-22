@@ -360,7 +360,11 @@ SAVVIS;
     static public function videoUrl() 
     {
         $repository = App::$inst->em->getRepository('Entity\TabApp');
-        $app_config = $repository->findOneBy(array('name' => 'app'))->getConfig();
+        try {
+            $app_config = $repository->findOneBy(array('name' => 'app'))->getConfig();
+        } catch (\Exception $e){//if no config is present
+            return false;
+        }
         $app_config = json_decode($app_config, true);
         if ($app_config && array_key_exists('videoURL', $app_config) && $app_config['videoURL'] != NULL) {
             return $app_config['videoURL'];
