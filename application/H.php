@@ -366,7 +366,7 @@ SAVVIS;
                 $app_config=$app_settings->getConfig();
             }
             else{
-                return false;
+                return "";
             }
         } catch (\Exception $e){//if no config is present
             return false;
