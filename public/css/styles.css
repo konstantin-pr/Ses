@@ -12,7 +12,7 @@ body{
 }
 a{ text-decoration:none; color: #ffffff; -webkit-tap-highlight-color:transparent; }
 a:hover{text-decoration: underline;}
-html.app-loading{ background:#ffffff url(/img/app-loading.gif) no-repeat center center; }
+html.app-loading{ background:#ffffff url(../img/app-loading.gif) no-repeat center center; }
 html.app-loading body{ visibility:hidden; }
 html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!important; }
 .app-mobile body{ -webkit-user-select:none; }
@@ -30,7 +30,7 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	width:100%;
 	position:absolute;
 	z-index:1;
-	background: rgba(255, 255, 255, 0.8) url(/img/empty.png);
+	background: rgba(255, 255, 255, 0.8) url(../img/empty.png);
 	zoom:1;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF,endColorstr=#CCFFFFFF);
 	display:none;
@@ -43,7 +43,7 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	margin-left:-50px;
 	margin-top:-50px;
 	position:fixed;
-	background:transparent url(/img/app-loading.gif) no-repeat center center;
+	background:transparent url(../img/app-loading.gif) no-repeat center center;
 }
 .app-process .process{ display:block; }
 
@@ -58,13 +58,11 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	right:0;
 	min-height:100%;
 	text-align:center;
-	background: rgba(255, 255, 255, 0.6) url(/img/empty.png);
+	background: rgba(255, 255, 255, 0.6) url(../img/empty.png);
 	zoom:1;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#AAFFFFFF,endColorstr=#AAFFFFFF);
 }
-.popup-shadow{
-	display:inline-block;
-	margin-top:150px;
+.popup-shadow{ display:inline-block; margin-top:150px;
 }
 .popup-close{
 	font-family: monospace;
@@ -73,12 +71,8 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	right:0;
 	top:0;
 	padding: 5px 8px 10px 10px;
-	color: #555555;
 }
-.popup-close:hover{
-	color: #000000;
-	text-decoration: none;
-}
+.popup-close:hover{ color: #000000; text-decoration: none; }
 .popup-content{
 	width:500px;
 	margin:auto 0;
@@ -89,20 +83,19 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	line-height:20px;
 	background-color:#FFFFFF;
 	border:1px solid #8c8c8c;
+	border-radius: 20px;
 }
 .popup-include{
 	min-height:150px;
 }
 
 /*popups*/
-.popup .terms{
-	padding-top: 30px;
-	padding-bottom: 50px;
-}
-.popup .terms h1{
-	font-size: 28px;
-	line-height: 1;
-}
+.popup a { color: #555555; }
+.popup a.popup-btn { display: inline-block; text-transform: uppercase; }
+.popup a.popup-btn:hover { color: #000000; text-decoration: none; }
+.popup h1{ font-size: 28px; line-height: 1; }
+.popup .alert { padding: 25px 20px; }
+.popup .terms{ padding-top: 30px; padding-bottom: 50px; }
 .popup .terms .content{
 	margin: 30px 17px 0 20px;
 	padding-right: 10px;
@@ -284,7 +277,7 @@ ol li span{
 	vertical-align: middle;
 }
 
-.app-route-entry h1{
+.app-route-entry #view h1{
 	padding-top: 45px;
 	margin-bottom: 30px;
 }
@@ -361,7 +354,7 @@ form .btn{
 .app-route-products .top-area{
 	height: 138px;
 }
-.app-route-products h1{
+.app-route-products #view h1{
 	padding-top: 17px;
 	margin-bottom: 76px;
 }
@@ -403,7 +396,7 @@ form .btn{
 .app-route-thanks .top-area{
 	height: 116px;
 }
-.app-route-thanks h1{
+.app-route-thanks #view h1{
 	padding-top: 36px;
 	margin-bottom: 75px;
 }
@@ -431,7 +424,7 @@ form .btn{
 }
 
 /*final*/
-[class*="app-route-final"] h1{
+[class*="app-route-final"] #view h1{
 	margin: 50px auto 30px;
 }
 

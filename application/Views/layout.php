@@ -83,7 +83,7 @@ window.appConfig = <?php echo H::vars(true); ?>;
 window.appModules = function(){
     var l = Array.prototype.slice.call(arguments, 0), i = 0;
     l = l.length ? l : ['ngRoute', 'ngAnimate', 'ngResource'];
-    while(i < l.length){try{angular.module(l[i]); i++}catch(e){l.splice(i, 1);};};
+    while(i < l.length){try{angular.module(l[i]); i++}catch(e){l.splice(i, 1);}}
     return l;
 };
 angular.extend(window.appConfig.fb, {

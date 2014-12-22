@@ -11,21 +11,20 @@
 <p>In addition to the major prize of a backyard cricket match with Michael Clarke, we’re giving away 100 Oral-B Clinical
     Starter Kits valued at $100.</p>
 
-<form name="entry">
-    <label>First name<input type="text" ng-model="firstName"/></label>
-    <label>Last name<input type="text" ng-model="lastName"/></label>
-    <label>Email<input type="email" ng-model="email"/></label>
+<form name="form">
+    <label>First name<input type="text" ng-model="entry.firstName" maxlength="30" required="required"/></label>
+    <label>Last name<input type="text" ng-model="entry.lastName" maxlength="30" required="required"/></label>
+    <label>Email<input type="email" ng-model="entry.email" required="required"/></label>
     <label class="birth">DOB
         <span>
-            <select ng-model="month" id="month" ng-options="m for m in months" ng-init="month='Jan'"></select>
-            <select ng-model="year" id="year" ng-options="y for y in years" ng-init="year=1970"></select>
+            <select ng-model="entry.month" id="month" ng-options="m for m in months" ng-init="entry.month='Jan'" required="required"></select>
+            <select ng-model="entry.year" id="year" ng-options="y for y in years" ng-init="entry.year=1970" required="required"></select>
         </span>
     </label>
-    <label class="checkbox"><input type="checkbox" ng-model="terms"/>I agree to the P&G <a href="javascript:void(0)" ng-click="popup.show('terms.html',0,{isFocusable:true})">Terms and Conditions</a></label>
-    <label class="checkbox"><input type="checkbox" ng-model="rules"/>I agree to the rules of this sweepstake</label>
-    <label class="checkbox"><input type="checkbox" ng-model="receiveEmails"/>Yes I would like to receive an email from P&G</label>
-    <button class="btn" type="submit"
-            ng-click="submitEntry({firstName:firstName,lastName:lastName,email:email,birthDate:month+' '+year,terms:!!terms,rules:!!rules,receiveEmails:!!receiveEmails})">submit my details</button>
+    <label class="checkbox"><input type="checkbox" ng-model="entry.terms" required="required"/>I agree to the P&G <a href="javascript:void(0)" ng-click="popup.show('terms.html',0,{isFocusable:true})">Terms and Conditions</a></label>
+    <label class="checkbox"><input type="checkbox" ng-model="entry.rules" required="required"/>I agree to the rules of this sweepstake</label>
+    <label class="checkbox"><input type="checkbox" ng-model="entry.receiveEmails"/>Yes I would like to receive an email from P&G</label>
+    <button class="btn" type="submit" ng-click="form.$valid&&submitEntry(entry)">submit my details</button>
 </form>
 
 <a href="/" class="logo"></a>
