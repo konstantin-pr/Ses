@@ -20,7 +20,6 @@
         var now = new Date();
         var age = now.getFullYear() - entry.year;
         if ((age < 18) || (age === 18 && now.getMonth() < $scope.months.indexOf(entry.month))) {
-                console.warn('Oops');
             $rootScope.popup.show('alert.html', '<h1>Sorry</h1><p>You have to be 18 to be able to participate.</p>', {isFocusable: true});
             return;
         }
