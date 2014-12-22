@@ -15,7 +15,7 @@ module.exports = function (grunt) {
                 app: [
                     'public/js/lib/application.js',
                     'public/js/lib/analytics.js',
-                    'public/js/lib/facebook.js',
+                    //'public/js/lib/facebook.js',
                     //'public/js/mock/mock.js',
                     'public/js/*.js'
                 ],
