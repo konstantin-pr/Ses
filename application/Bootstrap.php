@@ -271,7 +271,7 @@ class Bootstrap
                         'isAdmin' => (boolean)@$sr->sr['page']['admin'], // is userId admin of currentPageId (from POST request, or false)
                         'appData' => H::appData(), // from request, without parsing
                         'locale' => App::$inst->locale, // default = en_US
-                        'debug' => isset(App::$inst->config['debugBar']) ? App::$inst->config['debugBar'] : '',
+                        'debug' => isset(App::$inst->config['debugBar']) ? (int)App::$inst->config['debugBar'] : '',
                     ), \ArrayObject::ARRAY_AS_PROPS),
                 'ig' => new \ArrayObject(array(
                         'appId' => isset($config['instagram']['appId']) ? $config['instagram']['appId'] : null,
