@@ -255,13 +255,13 @@ div[app-video]{
 ol{
 	font-size: 17px;
 	margin: 30px auto 20px;
-	max-width: 420px;
+	max-width: 500px;
 	text-align: left;
 }
 ol li{
 	margin-bottom: 7px;
-	height: 30px;
-	line-height: 30px;
+	margin-left: 40px;
+	line-height: 26px;
 	vertical-align: middle;
 }
 ol li span{
