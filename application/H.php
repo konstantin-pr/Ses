@@ -361,10 +361,17 @@ SAVVIS;
     {
         $repository = App::$inst->em->getRepository('Entity\TabApp');
         try {
-            $app_config = $repository->findOneBy(array('name' => 'app'))->getConfig();
+            $app_settings = $repository->findOneBy(array('name' => 'app'));
+            if ($app_settings) {
+                $app_config->$app_settings->getConfig();
+            }
+            else{
+                return false;
+            }
         } catch (\Exception $e){//if no config is present
             return false;
         }
+        
         $app_config = json_decode($app_config, true);
         if ($app_config && array_key_exists('videoURL', $app_config) && $app_config['videoURL'] != NULL) {
             return $app_config['videoURL'];
