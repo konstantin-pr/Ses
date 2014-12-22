@@ -11,7 +11,7 @@ class Admin_Controller extends Stuzo_Admin_App_Abstract
             'analytics' => 1,
             'settings' => 1,
             'cms' => 1,
-            'moderation' => 1
+            'moderation' => 0
         );
     }
 }

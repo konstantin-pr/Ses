@@ -285,7 +285,8 @@ class Bootstrap
                         'environment' => APPLICATION_ENV, // staging, production, develop, local, ...
                         'isMobile' => Device::device()->isMobile,
                         'gaAccount' => @$config['metrics']['options']['code'],
-                        'gaNamespace' => ''
+                        'gaNamespace' => '',
+                        'videoUrl' => H::videoURL()
                     ), \ArrayObject::ARRAY_AS_PROPS)
             ), \ArrayObject::ARRAY_AS_PROPS);
 

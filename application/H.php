@@ -3,7 +3,7 @@
 namespace Application;
 
 use Application\Helpers\Resource;
-
+use Entity\TabApp;
 
 class H
 {
@@ -355,4 +355,18 @@ SAVVIS;
         }
         return '';
     }
+
+
+    static public function videoUrl() 
+    {
+        $repository = App::$inst->em->getRepository('Entity\TabApp');
+        $app_config = $repository->findOneBy(array('name' => 'app'))->getConfig();
+        $app_config = json_decode($app_config, true);
+        if ($app_config && array_key_exists('videoURL', $app_config) && $app_config['videoURL'] != NULL) {
+            return $app_config['videoURL'];
+        }
+        else 
+            return false;
+    }
+
 }

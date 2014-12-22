@@ -1,11 +1,18 @@
 <div id="CmsContentBox">
     <div class="lefttab">
-        <div><a href="<?php echo $this->configUrl ?>&type=imex" spa="link" target="ContentBox"
-                ondata="selectTab(this);">Copy Import/Export</a></div>
+        <div><a href="<?php echo $this->configUrl ?>&type=winners" spa="link" target="ContentBox"
+                ondata="selectTab(this);">Winners</a></div>
     </div>
+    <div class="lefttab">
+        <div><a href="<?php echo $this->configUrl ?>&type=Export Users" spa="link" target="ContentBox"
+                ondata="selectTab(this);">Export Users</a></div>
+    </div>
+
+
     <div class="container0" id="ContentBox">
-        <?php echo $this->render('imex.tpl'); ?>
+        <?php echo $this->render('winners.tpl'); ?>
     </div>
+
 
     <script type="text/javascript">
         function selectTab(item) {
