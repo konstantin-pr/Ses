@@ -12,7 +12,7 @@ body{
 }
 a{ text-decoration:none; color: #ffffff; -webkit-tap-highlight-color:transparent; }
 a:hover{text-decoration: underline;}
-html.app-loading{ background:#ffffff url(../../img/app-loading.gif) no-repeat center center; }
+html.app-loading{ background:#ffffff url(/img/app-loading.gif) no-repeat center center; }
 html.app-loading body{ visibility:hidden; }
 html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!important; }
 .app-mobile body{ -webkit-user-select:none; }
@@ -30,7 +30,7 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	width:100%;
 	position:absolute;
 	z-index:1;
-	background: rgba(255, 255, 255, 0.8) url(../../img/empty.png);
+	background: rgba(255, 255, 255, 0.8) url(/img/empty.png);
 	zoom:1;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF,endColorstr=#CCFFFFFF);
 	display:none;
@@ -43,7 +43,7 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	margin-left:-50px;
 	margin-top:-50px;
 	position:fixed;
-	background:transparent url(../../img/app-loading.gif) no-repeat center center;
+	background:transparent url(/img/app-loading.gif) no-repeat center center;
 }
 .app-process .process{ display:block; }
 
@@ -58,7 +58,7 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 	right:0;
 	min-height:100%;
 	text-align:center;
-	background: rgba(255, 255, 255, 0.6) url(../../img/empty.png);
+	background: rgba(255, 255, 255, 0.6) url(/img/empty.png);
 	zoom:1;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#AAFFFFFF,endColorstr=#AAFFFFFF);
 }
@@ -147,7 +147,7 @@ p{
 	text-transform: uppercase;
 	color: #ffffff;
 	border: 0;
-	background: url(../../img/btn.png) no-repeat center;
+	background: url(/img/btn.png) no-repeat center;
 }
 .btn:hover{
 	text-decoration: none;
@@ -160,7 +160,7 @@ p{
 	width: 18px;
 	height: 25px;
 	content: '';
-	background: url(../../img/arrow-right.png) no-repeat center;
+	background: url(/img/arrow-right.png) no-repeat center;
 }
 
 .landing-top-img{
@@ -193,7 +193,7 @@ div[app-video]{
 	margin: -89px 0 0 -45px;
 	width: 115px;
 	height: 164px;
-	background: url(../../img/play.png) no-repeat center;
+	background: url(/img/play.png) no-repeat center;
 	cursor:pointer;
 }
 
@@ -214,7 +214,7 @@ div[app-video]{
 	left: 18px;
 	width: 111px;
 	height: 39px;
-	background: url(../../img/logo.png) no-repeat center;
+	background: url(/img/logo.png) no-repeat center;
 }
 
 .footer{
@@ -412,11 +412,11 @@ form .btn{
 }
 .share.fb{
 	margin: 22px auto 18px;
-	background-image: url(../../img/share-fb-1.png);
+	background-image: url(/img/share-fb-1.png);
 }
 .share.tw{
 	margin: 18px auto 38px;
-	background-image: url(../../img/share-tw-1.png);
+	background-image: url(/img/share-tw-1.png);
 }
 
 .app-route-thanks .share.tw{
