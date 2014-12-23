@@ -197,6 +197,7 @@ class Registration
 					$gift_free = App::$inst->em->find('Entity\Gift', $gift['id'], \Doctrine\DBAL\LockMode::PESSIMISTIC_WRITE );
 					if (!$gift_free['user']) {
 						$gift_free['user'] = $user;
+						$gift_free['user']['date_win'] =  new \DateTime();
 						App::$inst->em->flush();
 						App::$inst->em->commit();
 						return true;

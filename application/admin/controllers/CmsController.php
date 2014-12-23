@@ -36,7 +36,7 @@ class Admin_CmsController extends Stuzo_Admin_App_Abstract
 
     function indexAction()
     {
-
+	$this->winnersAction();
     }
 
     /**
@@ -160,5 +160,43 @@ class Admin_CmsController extends Stuzo_Admin_App_Abstract
             echo $trackingUrls->export();
         }
         exit(1);
+    }
+
+    /**
+     *
+     */
+    public function generateRandoms(){
+        $url = "https://api.random.org/json-rpc/1/invoke";
+        $data = array (
+            'id' => '7966',
+            'jsonrpc' => '2.0',
+            'method'  => 'generateIntegers',
+            'params'  => array (
+                'apiKey' => '00000000-0000-0000-0000-000000000000',
+                'base'   => '10',
+                'max'    => '1440',
+                'min'    => '0',
+                'n'      => '100',
+                'replacement' => 'true'
+                ));
+        $s = curl_init();
+        curl_setopt($s, CURLOPT_URL, $url);
+        curl_setopt($s, CURLOPT_POST, true);
+        curl_setopt($s, CURLOPT_POSTFIELDS, json_encode($data));
+        $res = curl_getinfo($s,CURLINFO_HTTP_CODE);
+        die(var_dump($res)); 
+    }
+
+    /**
+     * show winners action
+     */
+    public function winnersAction()
+    {
+    $this->view->gifts = DB::gift()->findAll();
+    //die (print_r($this->view->gifts));
+	//$this->view->winners = array(
+	//    1 => array (1,2,4,5)
+	//);
+	//return "testing output from admin/CmsController/winnerAction!!!n";
     }
 }

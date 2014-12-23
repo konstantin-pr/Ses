@@ -1,21 +1,31 @@
 <?php if ($this->userIsAdmin): ?>
-    <h1 class="header">Winners</h1>
-
+    <h1 class="header">Gifts Available:</h1>
+ 
     <br/>
 
     <div>
         <table>
             <tbody>
 	        <tr>
-    	            <td><label>Winning Time</label></td>
-		    <td><label>Winner's Email</label></td>
-		    <td><label>Actual Win Time</label></td>
-                </tr>
-                <tr>
-                    <td>qweqe</td>
-		    <td>qweqew</td>
-		    <td>qweqe</td>
-                </tr>
+    	    <td><label>Winning Time</label></td>
+    		    <td><label>Win Time</label></td>
+            <td><label>Winner's Email</label></td>
+
+            </tr>
+            <?php foreach($this->gifts as $gift): ?>
+            <tr>
+            <td><?php echo $gift['winning_time']->format('Y-m-d H:i:s a') ?></td>
+		    <td><?php 
+            if ($gift['user']['date_win']){
+                echo $gift['user']['date_win']->format('Y-m-d H:i:s a'); 
+            }
+            else {
+                echo "Available";
+            }
+            ?></td>
+            <td><?php echo $gift['user']['email'] ?></td>
+            </tr>
+        <?php endforeach; ?>
             </tbody>
         </table>
     </div>
