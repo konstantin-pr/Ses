@@ -189,7 +189,8 @@
         if(isFB && (self.isTab || self.isCanvas)){
             FB.Canvas.setAutoGrow(false);
             $timeout(function(){
-                var height = value || Math.max(document.body.scrollHeight, document.body.offsetHeight);
+                var view = document.getElementById('view');
+                var height = value || Math.max(view.scrollHeight, view.offsetHeight);
                 if(typeof(height) == 'string'){
                     var obj = document.getElementById(height);
                     height = Math.max(obj.scrollHeight, obj.offsetHeight);
@@ -746,7 +747,7 @@
         var view = document.getElementById('view');
         view && $facebook.grow(Math.max(view.offsetHeight, view.clientHeight), (self.isTab || self.isCanvas));
     }, 500);};
-    $rootScope.$on('$routeChangeSuccess', (self.isTab || self.isCanvas) && onGrow());
+    $rootScope.$on('$routeChangeSuccess', (self.isTab || self.isCanvas) && onGrow);
 }]);
 
 !function(options){
