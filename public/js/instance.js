@@ -96,7 +96,7 @@
     }
 
     $rootScope.$on('$routeChangeSuccess', function () {
-        ($config.fb.isTab || $config.fb.isCanvas) && FB && FB.Canvas.setSize();
+        $timeout(FB.Canvas.setSize(), 500);
     });
 
 }]);
