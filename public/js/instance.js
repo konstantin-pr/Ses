@@ -63,12 +63,12 @@
 
     // Predefined methods
     // see facebook.js
-    $facebook.phototag(function(){
-        console.log(arguments[0]);
-    });
-    $facebook.user(function(){
-        console.log(arguments[0]);
-    });
+    //$facebook.phototag(function(){
+    //    console.log(arguments[0]);
+    //});
+    //$facebook.user(function(){
+    //    console.log(arguments[0]);
+    //});
 
     var y = $config.app.videoUrl.indexOf(/youtu.?be/);
     if (y != -1) {
@@ -94,10 +94,6 @@
             $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 10);
         }
     }
-
-    $rootScope.$on('$routeChangeSuccess', function () {
-        FB.Canvas.setSize();
-    });
 
 }]);
 
