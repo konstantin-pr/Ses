@@ -11,12 +11,12 @@
     $routeProvider   = $injector.get('$routeProvider');
 
     $routeProvider
-    .when('/home', {templateUrl: '/html/' + $agent.device + '/home.html'})
-    .when('/entry', {templateUrl: '/html/' + $agent.device + '/entry.html', controller: 'entry'})
-    .when('/products', {templateUrl: '/html/' + $agent.device + '/products.html'})
-    .when('/final1', {templateUrl: '/html/' + $agent.device + '/final1.html'})
-    .when('/final2', {templateUrl: '/html/' + $agent.device + '/final2.html'})
-    .when('/thanks', {templateUrl: '/html/' + $agent.device + '/thanks.html'})
+    .when('/home', {templateUrl: '/html/desktop/home.html'})
+    .when('/entry', {templateUrl: '/html/desktop/entry.html', controller: 'entry'})
+    .when('/products', {templateUrl: '/html/desktop/products.html'})
+    .when('/final1', {templateUrl: '/html/desktop/final1.html'})
+    .when('/final2', {templateUrl: '/html/desktop/final2.html'})
+    .when('/thanks', {templateUrl: '/html/desktop/thanks.html'})
     .otherwise({redirectTo: '/home'});
 }])
 
@@ -31,7 +31,7 @@
     $rootScope = $injector.get('$rootScope');
     
     $rootScope.config = $config;
-    
+
     //$rootScope.loginLinkedin = function(){
     //    $rootScope.oauth.loginLinkedin('75apyh2ggqrmjb', 'r_fullprofile').then(
     //        function(data){
@@ -49,7 +49,8 @@
     $rootScope.process = function(value){$timeout(function(){$rootScope.tags.set('process', Boolean(value));});};
 
     // Popups
-    $rootScope.popup = $popup.create('/html/' + $agent.device + '/popups/');
+    //$rootScope.popup = $popup.create('/html/' + $agent.device + '/popups/');
+    $rootScope.popup = $popup.create('/html/desktop/popups/');
     //$rootScope.popupCustom = $popup.create('/html/customPopups/');
 
     // Two friendly ways to use the FB API,
@@ -68,6 +69,31 @@
     //$facebook.user(function(){
     //    console.log(arguments[0]);
     //});
+
+    var y = $config.app.videoUrl.indexOf(/youtu.?be/);
+    if (y != -1) {
+        y = $config.app.videoUrl.indexOf('youtube.com/watch');
+        if (y != -1) {
+            y = $config.app.videoUrl.indexOf(/\?*&*v=/);
+            $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 3, 11);
+        } else {
+            y = $config.app.videoUrl.indexOf('youtube.com/embed/');
+            if (y != -1) {
+                $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 18, 11);
+            } else {
+                y = $config.app.videoUrl.indexOf('youtu.be/');
+                if (y != -1) {
+                    $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 9, 11);
+                }
+            }
+        }
+    } else {
+        y = $config.app.videoUrl.indexOf('vimeo.com/');
+        if (y != -1) {
+            $rootScope.config.app.videoProvider = 'vimeo';
+            $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 10);
+        }
+    }
 
 }]);
 
