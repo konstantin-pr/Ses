@@ -106,7 +106,7 @@
             fun(deferred);
         }else{
             resolve(deferred);
-        };
+        }
         return deferred.promise;
     };
 
@@ -121,7 +121,12 @@
         s.clr = function(){s.store = {};};
         s.get = function(k){return typeof(s.store[k]) != 'undefined' ? s.store[k] : null;};
         s.set = function(k, v){s.use && (s.store[k] = v); return s;};
-        s.del = function(k){if(typeof(s.store[k]) != 'undefined'){delete s.store[k];}; return s;};
+        s.del = function (k) {
+            if (typeof(s.store[k]) != 'undefined') {
+                delete s.store[k];
+            }
+            return s;
+        };
         s.disable = function(){s.use = false; return !s.use;};
         s.enable = function(){s.use = true;return !s.use;};
         return s;
@@ -137,8 +142,8 @@
                         callback = value;
                     }else{
                         params.push(value);
-                    };
-                };
+                    }
+                }
             });
             if(method == 'api' && self.cache.use && !!(response = self.cache.get(key))){
                 $timeout(function(){
@@ -147,7 +152,7 @@
                     deferred[!response || response.error ? 'reject' : 'resolve'](response);
                 }, 100); // cache delay
                 return deferred.promise;
-            };
+            }
             method == 'ui' && broadcast('dialogOpen', method);
             method && FB[method].apply(FB, params.concat(function(response){
                 response && !response.error && method == 'api' && self.cache.set(key, response);
@@ -160,7 +165,7 @@
             }));
         }else{
             return reject(deferred, null, callback);
-        };
+        }
         return deferred.promise;
     };
 
@@ -208,7 +213,10 @@
 
     self.login = function(permissions, callback){
         return produce(function(deferred){
-            if(angular.isFunction(permissions)){callback = permissions; permissions = '';};
+            if (angular.isFunction(permissions)) {
+                callback = permissions;
+                permissions = '';
+            }
             permissions = permissions || $options.permissions || '';
             broadcast('login');
             isFB && FB.login(function(response){
@@ -230,7 +238,10 @@
 
     self.user = function(id, callback){
         return produce(function(deferred){
-            if(angular.isFunction(id)){callback = id; id = '';};
+            if (angular.isFunction(id)) {
+                callback = id;
+                id = '';
+            }
             self.api('/' + (id ? id : 'me'), function(response){
                 resolve(deferred, response, callback);
             });
@@ -239,7 +250,10 @@
 
     self.scores = function(scores, userId, callback){
         return produce(function(deferred){
-            if(angular.isFunction(userId)){callback = userId; userId = '';};
+            if (angular.isFunction(userId)) {
+                callback = userId;
+                userId = '';
+            }
             self.api('/' + (id ? id : 'me') + '/scores', 'post', {score:scores, access_token:self.token()}, function(response){
                 resolve(deferred, response, callback);
             });
@@ -261,8 +275,8 @@
                 cursor = cursor.split(/;/g);
                 if(cursor.length >= 2){
                     params[cursor[0]] = cursor[1] || '';
-                };
-            };
+                }
+            }
             self.api('me/albums', params).then(
                 function(response){
                     var data = response.data || [];
@@ -270,9 +284,9 @@
                         // return album like a photo
                         data[i].is_album = true;
                         data[i].picture = data[i].picture.data.url;
-                        data[i].source = data[i].picture
+                        data[i].source = data[i].picture;
                         data[i].images = [{source:data[i].picture}];
-                    };
+                    }
                     resolve(deferred, {
                         next:response.paging && response.paging.next && (response.paging.cursors && response.paging.cursors.after) ? 'after;' + response.paging.cursors.after : '',
                         prev:response.paging && response.paging.previous && (response.paging.cursors && response.paging.cursors.before) ? 'before;' + response.paging.cursors.before : '',
@@ -293,8 +307,8 @@
                 cursor = cursor.split(/;/g);
                 if(cursor.length >= 2){
                     params[cursor[0]] = cursor[1] || '';
-                };
-            };
+                }
+            }
             self.api(albumId + '/photos', params).then(
                 function(response){
                     var data = {
@@ -316,7 +330,7 @@
         if(angular.isFunction(albumId) && arguments.length < 2){
             callback = albumId;
             albumId = undefined;
-        };
+        }
         if(albumId){
             return produce(function(deferred){
                 var result = [], isAlbum = angular.isObject(albumId);
@@ -334,11 +348,11 @@
                                             album.picture = album.picture.data.url;
                                             album.source = album.picture;
                                             album.images = [{source:album.picture}];
-                                        };
+                                        }
                                         album.photos = result;
                                         !album.count && (album.count = album.photos.length);
                                         resolve(deferred, album, callback);
-                                    };
+                                    }
                                 },
                                 function(err){
                                     reject(deferred, err, callback);
@@ -372,7 +386,7 @@
                     }
                 );
             });
-        };
+        }
     };
     
     self.phototag = function(callback){
@@ -386,16 +400,15 @@
         if(params.display == 'popup' || params.redirect_uri || redirect){
             !params.redirect_uri && (params.redirect_uri = angular.isString(redirect) ? redirect : $config.app.url);
             var url = document.location.protocol + '//' + 'facebook.com/dialog/feed?' + $tools.getUrlString(params, true);
-        };
-        
+        }
         if(params.display == 'popup'){
             var win = $tools.getWindow(url);
             return;
-        };
+        }
         if(params.redirect_uri || redirect){
             window.location = url;
             return;
-        };
+        }
         return produce(function(deferred){
             self.ui(params, function(response){
                 broadcast('share', {data:data, response:response});
@@ -411,15 +424,15 @@
         if(params.display == 'popup' || params.redirect_uri || redirect){
             !params.redirect_uri && (params.redirect_uri = angular.isString(redirect) ? redirect : $config.app.url);
             var url = document.location.protocol + '//' + 'facebook.com/dialog/apprequests?' + $tools.getUrlString(params, true);
-        };
+        }
         if(params.display == 'popup'){
             var win = $tools.getWindow(url);
             return;
-        };
+        }
         if(params.redirect_uri || redirect){
             window.location = url;
             return;
-        };
+        }
         return produce(function(deferred){
             self.ui(params, function(response){
                 broadcast('invite', {data:data, response:response});
@@ -480,8 +493,8 @@
                 if(response.data && response.data.length){
                     for(var i = 0; i < response.data.length; i++){
                         response.data[i].status == 'granted' && result.push(response.data[i].permission);
-                    };
-                };
+                    }
+                }
                 self.permissionsCache = result.join(' ');
                 broadcast('permissions', self.permissionsCache);
                 resolve(deferred, self.permissionsCache, callback);
@@ -490,13 +503,16 @@
         }else{
             self.permissionsCache = ''; 
             resolve(deferred, '', callback);
-        };
+        }
         return deferred.promise;
     };
 
     self.access = function(permissions, callback){
         var deferred = $q.defer();
-        if(angular.isFunction(permissions)){callback = permissions; permissions = '';};
+        if (angular.isFunction(permissions)) {
+            callback = permissions;
+            permissions = '';
+        }
         permissions = permissions || $options.permissions || '';
         self.permissions().then(function(data){
             var result = true;
@@ -505,8 +521,8 @@
                 if(data.indexOf(list[i]) < 0){
                     result = false;
                     break;
-                };
-            };
+                }
+            }
             result ? resolve(deferred, result, callback) : reject(deferred, result, callback);
         });
         return deferred.promise;
@@ -522,7 +538,7 @@
             self.cache.use = tmp;
         }else{
             resolve(deferred, '', callback);
-        };
+        }
         return deferred.promise;
     };
     
@@ -537,15 +553,17 @@
                 });
             }catch(e){
                 resolve(deferred, result, callback);
-            };
+            }
         }else{
             resolve(deferred, result, callback);
-        };
+        }
         return deferred.promise;
     };
 
     self.init = function(){
-        if(!$options.appId){return false;};
+        if (!$options.appId) {
+            return false;
+        }
         $tools.tags
         .set('fb-app-' + $options.appId, true)
         .set('fb-page-' + $options.pageId, $options.pageId)
@@ -570,15 +588,15 @@
                 if(params.state == 'login-redirect' && document.location.hash.indexOf('login-redirect') >= 0){
                     broadcast(params.code ? 'allowLoginRedirect' : 'cancelLoginRedirect');
                     document.location.hash = '#_';
-                };
+                }
                 if(params.request && params.to && document.location.hash.indexOf('_=_') >= 0){
                     broadcast('invite', {data: {}, response: {to: params.to}});
                     document.location.hash = '#_';
-                };
+                }
                 if(params.post_id && document.location.hash.indexOf('_=_') >= 0){
                     broadcast('share', {data: {}, response: {post_id: params.post_id}});
                     document.location.hash = '#_';
-                };
+                }
             });
         };
         var handleConnect = function(connect){
@@ -617,7 +635,7 @@
             });
         }else{
             handleInit();
-        };
+        }
     };
     return self;
 }])
@@ -716,12 +734,12 @@
             fbData = {};
             fbData.signed_request = sign;
             fbData.access_token = $facebook.token();
-        };
+        }
         if(angular.isString(data)){
             return data + (fbData ? '&' + $tools.getUrlString(fbData) : '');
         }else if(angular.isObject(data) && String(data) !== '[object File]'){
             return $tools.getUrlString(angular.extend(data, fbData || {}));
-        };
+        }
     });
 
     var onGrow = function(e, popup){$timeout(function(){
@@ -758,7 +776,7 @@
             var script = document.createElement('script');
             script.async = 'true';
             script.type = 'text/javascript';
-            script.src = '//connect.facebook.net/' + options.locale + '/sdk.js';
+            script.src = '//connect.facebook.net/' + options.locale + '/sdk/debug.js';
             document.body.appendChild(div);
             document.getElementsByTagName('head')[0].appendChild(script);
         }
