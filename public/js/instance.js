@@ -96,7 +96,7 @@
     }
 
     $rootScope.$on('$routeChangeSuccess', function () {
-        $timeout(FB.Canvas.setSize(), 500);
+        $timeout(function() { FB.Canvas.setSize(); }, 500);
     });
 
 }]);
