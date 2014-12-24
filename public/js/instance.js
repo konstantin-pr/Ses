@@ -95,6 +95,8 @@
         }
     }
 
+        ($config.fb.isTab || $config.fb.isCanvas) && FB.Canvas.setAutoGrow(true);
+
 }]);
 
 //------------------------------------------------------ end
