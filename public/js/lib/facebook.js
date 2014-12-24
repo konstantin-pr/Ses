@@ -188,12 +188,12 @@
                 if(typeof(height) == 'string'){
                     var obj = document.getElementById(height);
                     height = Math.max(obj.scrollHeight, obj.offsetHeight);
-                };
+                }
                 FB.Canvas.setSize({height: height});
                 $timeout(function(){FB.Canvas.setAutoGrow(true);}, 100);
             }, 1000);
             !dontScroll && FB.Canvas.scrollTo(0, 0);
-        };
+        }
         !dontScroll && window.scroll(0, 0);
     };
     
@@ -748,7 +748,7 @@
                 if(options.autoConnect && (response.status == 'not_authorized' || response.status == 'unknown') && document.location.hash.indexOf('login-redirect') < 0){
                     window.location = 'https://' + (app.$Agent.device == 'mobile' ? 'm.' : '') + 'facebook.com/dialog/oauth?client_id=' + options.appId + '&state=login-redirect&redirect_uri=' + encodeURIComponent(options.redirectUrl + '#login-redirect') + '&scope=' + (options.permissions || '');
                     return;
-                };
+                }
                 angular.isFunction(options.onInit) && options.onInit.call({}, angular);
             }, true);
         };
@@ -758,13 +758,13 @@
             var script = document.createElement('script');
             script.async = 'true';
             script.type = 'text/javascript';
-            script.src = '//connect.facebook.net/' + options.locale + '/' + (options.debug ? 'sdk/debug' : 'sdk') + '.js';
+            script.src = '//connect.facebook.net/' + options.locale + '/sdk.js';
             document.body.appendChild(div);
             document.getElementsByTagName('head')[0].appendChild(script);
-        };
+        }
     }else{
         angular.isFunction(options.onInit) && options.onInit.call({}, angular);
-    };
+    }
 }.call({}, window.appConfig.fb || {});
 
 //------------------------------------------------------ end
