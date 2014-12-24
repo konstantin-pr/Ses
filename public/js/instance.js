@@ -25,7 +25,7 @@
     $config    = $injector.get('config'),
     $agent     = $injector.get('agent'),
     $tools     = $injector.get('tools'),
-    //$facebook  = $injector.get('facebook'),
+    $facebook  = $injector.get('facebook'),
     $popup     = $injector.get('popup'),
     $timeout   = $injector.get('$timeout'),
     $rootScope = $injector.get('$rootScope');
@@ -55,20 +55,20 @@
 
     // Two friendly ways to use the FB API,
     // as a promise or as a callback
-    //$facebook.api('/me', function(){
-    //    console.log(arguments[0]); //callback
-    //}).then(function(){
-    //    console.log(arguments[0]); //promise
-    //});
+    $facebook.api('/me', function(){
+        console.log(arguments[0]); //callback
+    }).then(function(){
+        console.log(arguments[0]); //promise
+    });
 
     // Predefined methods
     // see facebook.js
-    //$facebook.phototag(function(){
-    //    console.log(arguments[0]);
-    //});
-    //$facebook.user(function(){
-    //    console.log(arguments[0]);
-    //});
+    $facebook.phototag(function(){
+        console.log(arguments[0]);
+    });
+    $facebook.user(function(){
+        console.log(arguments[0]);
+    });
 
     var y = $config.app.videoUrl.indexOf(/youtu.?be/);
     if (y != -1) {
@@ -94,6 +94,10 @@
             $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 10);
         }
     }
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+        FB.Canvas.setSize();
+    });
 
 }]);
 

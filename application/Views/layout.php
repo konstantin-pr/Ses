@@ -100,6 +100,7 @@ angular.extend(window.appConfig.fb, {
 <script type="text/javascript" src="/js/lib/analytics.js"></script>
 <script type="text/javascript" src="/js/lib/application.js"></script>
 <script type="text/javascript" src="/js/lib/video.js"></script>
+<script type="text/javascript" src="/js/lib/facebook.js"></script>
 
 <script type="text/javascript" src="/js/controllers.js"></script>
 <script type="text/javascript" src="/js/instance.js"></script>
