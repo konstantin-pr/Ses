@@ -55,11 +55,11 @@
 
     // Two friendly ways to use the FB API,
     // as a promise or as a callback
-    $facebook.api('/me', function(){
-        console.log(arguments[0]); //callback
-    }).then(function(){
-        console.log(arguments[0]); //promise
-    });
+    //$facebook.api('/me', function(){
+    //    console.log(arguments[0]); //callback
+    //}).then(function(){
+    //    console.log(arguments[0]); //promise
+    //});
 
     // Predefined methods
     // see facebook.js
