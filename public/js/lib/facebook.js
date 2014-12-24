@@ -744,7 +744,7 @@
 
     var onGrow = function(e, popup){$timeout(function(){
         var view = document.getElementById('view');
-        view && $facebook.grow(Math.max(view.offsetHeight, view.clientHeight), self.isTab || self.isCanvas);
+        view && $facebook.grow(Math.max(view.offsetHeight, view.clientHeight), (self.isTab || self.isCanvas));
     }, 500);};
     $rootScope.$on('$routeChangeSuccess', (self.isTab || self.isCanvas) && onGrow());
 }]);
