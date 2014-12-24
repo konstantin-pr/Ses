@@ -11,7 +11,7 @@
 <p>In addition to the major prize of a backyard cricket match with Michael Clarke, we’re giving away 100 Oral-B Clinical
     Starter Kits valued at $100.</p>
 
-<form name="form">
+<form name="form" ng-class="{submitted:submitted}">
     <label>First name<input type="text" ng-model="entry.firstName" maxlength="30" required="required"/></label>
     <label>Last name<input type="text" ng-model="entry.lastName" maxlength="30" required="required"/></label>
     <label>Email<input type="email" ng-model="entry.email" required="required"/></label>
@@ -24,7 +24,7 @@
     <label class="checkbox"><input type="checkbox" ng-model="entry.terms" required="required"/>I agree to the P&G <a href="javascript:void(0)" ng-click="popup.show('terms.html',0,{isFocusable:true})">Terms and Conditions</a></label>
     <label class="checkbox"><input type="checkbox" ng-model="entry.rules" required="required"/>I agree to the rules of this sweepstake</label>
     <label class="checkbox"><input type="checkbox" ng-model="entry.receiveEmails"/>Yes I would like to receive an email from P&G</label>
-    <button class="btn" type="submit" ng-click="form.$valid&&submitEntry(entry)">submit my details</button>
+    <button class="btn" type="submit" ng-click="submitted=true;form.$valid&&submitEntry(entry)">submit my details</button>
     <!--<button class="btn" type="submit" ng-click="submitEntry(entry)">submit my details</button>-->
 </form>
 

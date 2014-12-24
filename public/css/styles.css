@@ -67,12 +67,20 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 .popup-close{
 	font-family: monospace;
 	font-weight: bold;
-	position:absolute;
-	right:0;
-	top:0;
-	padding: 5px 8px 10px 10px;
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	color: #8c8c8c;
+	background-color: #ffffff;
+	border: 1px solid #8c8c8c;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	line-height: 28px;
+	text-align: center;
+	vertical-align: middle;
 }
-.popup-close:hover{ color: #000000; text-decoration: none; }
+.popup-close:hover{ color: #555555; border-color: #555555; text-decoration: none; }
 .popup-content{
 	width:500px;
 	margin:auto 0;
@@ -90,20 +98,21 @@ html.app-mobile, .app-mobile body{ width:810px!important; max-width:810px!import
 }
 
 /*popups*/
-.popup a { color: #555555; }
-.popup a.popup-btn { display: inline-block; text-transform: uppercase; }
-.popup a.popup-btn:hover { color: #000000; text-decoration: none; }
-.popup h1{ font-size: 28px; line-height: 1; }
-.popup .alert { padding: 25px 20px; }
-.popup .terms{ padding-top: 30px; padding-bottom: 50px; }
-.popup .terms .content{
+.popup-include a { color: #555555; }
+.popup-include a.popup-btn { display: inline-block; text-transform: uppercase; min-width: 140px; min-height: 30px; line-height: 30px; border-radius: 20px; }
+.popup-include a.popup-btn:hover { color: #555555; text-decoration: none; background-color: #f0f0f0
+}
+.popup-include h1{ font-size: 28px; line-height: 1; }
+.popup-include .alert { padding: 25px 20px; }
+.popup-include .terms{ padding-top: 30px; padding-bottom: 50px; }
+.popup-include .terms .content{
 	margin: 30px 17px 0 20px;
 	padding-right: 10px;
 	max-height: 600px;
 	overflow: auto;
 	text-align: left;
 }
-.popup .terms .content p{font-size: 16px;}
+.popup-include .terms .content p{font-size: 16px;}
 
 /* TEMPLATE */
 body{
@@ -313,6 +322,7 @@ form input, form select{
 	box-shadow: none;
 	background: #ffffff;
 	box-sizing: border-box;
+	outline: none;
 }
 form label input{
 	float: right;
@@ -347,12 +357,26 @@ form label.checkbox{
 form label.checkbox input{
 	float: none;
 	margin: 0 14px 0 0;
+	padding: 0;
 	vertical-align: middle;
 	width: 21px;
 	height: 21px;
+	-moz-transform: scale(1.75);
 }
 form .btn{
 	margin-top: 40px;
+}
+
+form.submitted .ng-pristine,
+form.submitted .ng-invalid{
+	/*border: 2px solid #c74a00;*/
+	box-shadow: 0 0 1px 2px #c74a00;
+}
+form.submitted [type="checkbox"].ng-pristine{
+	box-shadow: none;
+}
+form.submitted [type="checkbox"].ng-invalid{
+	box-shadow: 0 0 1px 2px #c74a00;
 }
 
 /*products*/
