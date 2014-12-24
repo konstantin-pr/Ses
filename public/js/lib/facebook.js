@@ -776,7 +776,7 @@
             var script = document.createElement('script');
             script.async = 'true';
             script.type = 'text/javascript';
-            script.src = '//connect.facebook.net/' + options.locale + '/sdk/debug.js';
+            script.src = '//connect.facebook.net/' + options.locale + '/' + (options.debug ? 'sdk/debug' : 'sdk') + '.js';
             document.body.appendChild(div);
             document.getElementsByTagName('head')[0].appendChild(script);
         }

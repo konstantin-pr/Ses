@@ -48,7 +48,7 @@
             fun(deferred);
         }else{
             resolve(deferred);
-        };
+        }
         return deferred.promise;
     };
     
@@ -61,7 +61,9 @@
             });
         };
         var listener = function(){
-            if(typeof(twttr['events']) == 'undefined'){return;};
+            if (typeof(twttr['events']) == 'undefined') {
+                return;
+            }
             twttr.events.bind('click', handler);
             twttr.events.bind('tweet', handler);
             twttr.events.bind('retweet', handler);
@@ -81,7 +83,7 @@
                 listener();
             };
             document.getElementsByTagName('head')[0].appendChild(script);
-        };
+        }
     };    
     
     return self;
@@ -111,11 +113,14 @@
                 }else{
                     link.longUrl = u;
                     render(t || '', link.shortUrl || link.longUrl, h || '');
-                };
+                }
             };
             var changeHash = '';
             var change = function(){
-                var hash = [attributes.text, attributes.url, attributes.hashtags].join(''); if(changeHash == hash){return;};
+                var hash = [attributes.text, attributes.url, attributes.hashtags].join('');
+                if (changeHash == hash) {
+                    return;
+                }
                 shortener(attributes.text, attributes.url, attributes.hashtags);
                 changeHash = hash;
             };
@@ -151,11 +156,14 @@
                 }else{
                     link.longUrl = u;
                     render(t || '', link.shortUrl || link.longUrl, h || '');
-                };
+                }
             };
             var changeHash = '';
             var change = function(){
-                var hash = [attributes.text, attributes.url, attributes.hashtags].join(''); if(changeHash == hash){return;};
+                var hash = [attributes.text, attributes.url, attributes.hashtags].join('');
+                if (changeHash == hash) {
+                    return;
+                }
                 shortener(attributes.text, attributes.url, attributes.hashtags);
                 changeHash = hash;
             };

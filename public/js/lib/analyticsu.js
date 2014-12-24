@@ -32,9 +32,9 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     list.push('ga("' + gaTracker('set') + '","dimension' + slot + '","' + String(vars[key]) + '")');
                 }else{
                     window.ga(gaTracker('set'), 'dimension' + slot, String(vars[key]));
-                };
+                }
                 slot++;
-            };
+            }
             return isStr ? list.join(';') : list;
         };
         var gaDelVars = function(vars, isStr){
@@ -44,18 +44,20 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     list.push('window.ga("' + gaTracker('set') + '","dimension' + slot + '","")');
                 }else{
                     window.ga(gaTracker('set'), 'dimension' + slot, '');
-                };
+                }
                 slot++;
-            };
+            }
             return isStr ? list.join(';') : list;
         };
         var echo = function(){
-            if(angular.isUndefined(window['console'])){return;};
+            if (angular.isUndefined(window['console'])) {
+                return;
+            }
             if(angular.isFunction(window.console['log'])){
                 window.console.log.apply(window.console, arguments);
             }else{
                 for(var i = 0, j = arguments.length; i < j; i++){window.console.log(arguments[i]);}
-            };
+            }
         };
         var log = function(query, label, style){
             query = angular.isString(query) ? query : angular.toJson(query);
@@ -68,7 +70,7 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 case 'omniture': return 'background:#f3e8f5;color:#9948a7';
                 case 'event': return 'background:#cfc;color:#399839';
                 default: return 'background:#e1e1e1;color:#4e4e4e';
-            };
+            }
         };
         var event = function(obj, type, fn){
             if(obj.addEventListener){
@@ -80,7 +82,7 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 obj['on' + type] = function(e){origHandler(e); return fn(e);};
             }else{
                 obj['on' + type] = fn;
-            };
+            }
         };
 
         obj.init = function(){
@@ -95,7 +97,9 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     isolator.style.border = 'none';
                     isolator.scrolling = isolator.frameBorder = 'no';
                     event(isolator, 'load', function(){
-                        if(isInit){return;};
+                        if (isInit) {
+                            return;
+                        }
                         try{
                             //isolator.contentWindow.document.open();
                             isolator.contentWindow.document.writeln([
@@ -111,7 +115,8 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                                 '</' + 'script>'
                             ].join(''));
                             //isolator.contentWindow.document.close();
-                        }catch(e){};
+                        } catch (e) {
+                        }
                         isInit = true;
                     });
                     isolator.src = angular.isString(isolate) ? isolate : 'about:blank';
@@ -123,14 +128,14 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement('script'),
                     a.async=1;a.src=g;s.getElementsByTagName('head')[0].appendChild(a)
                     })(window,document,'https://www.google-analytics.com/analytics.js','ga');
-                };
+                }
                 window.ga('create', account, isLocal ? {cookieDomain:'none', storage:'none', name: tracker} : 'auto', {name: tracker});
                 window.ga(gaTracker('set'), 'forceSSL', true);
                 angular.isObject(vars) && gaSetVars(vars);
                 isLocal && window.ga(gaTracker('set'), 'checkProtocolTask', function(){});
                 referrer && window.ga(gaTracker('set'), 'referrer', referrer);
                 isInit = true;
-            };
+            }
             return obj;
         };
 
@@ -154,17 +159,35 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     img.style.left = '-1000px';
                     img.style.top = '-1000px';
                     img.src = src;
-                };
+                }
                 return obj;
             };
             obj.omniture = function(omnitureVars, method, methodVars){
-                if(angular.isUndefined(window['s']) || !angular.isFunction(window.s[method])){return obj;};
+                if (angular.isUndefined(window['s']) || !angular.isFunction(window.s[method])) {
+                    return obj;
+                }
                 var cache = {};
-                try{omnitureVars = (angular.isString(omnitureVars) ? angular.fromJson(omnitureVars) : omnitureVars) || {};}catch(e){omnitureVars = {};};
-                try{methodVars = (angular.isString(methodVars) ? angular.fromJson(methodVars) : methodVars) || [];}catch(e){methodVars = methodVars ? [methodVars] : [];};
-                for(key in omnitureVars){cache[key] = window.s[key] || ''; window.s[key] = omnitureVars[key];};
-                try{window.s[method].apply(window.s, methodVars);}catch(e){};
-                for(key in cache){window.s[key] = cache[key];};
+                try {
+                    omnitureVars = (angular.isString(omnitureVars) ? angular.fromJson(omnitureVars) : omnitureVars) || {};
+                } catch (e) {
+                    omnitureVars = {};
+                }
+                try {
+                    methodVars = (angular.isString(methodVars) ? angular.fromJson(methodVars) : methodVars) || [];
+                } catch (e) {
+                    methodVars = methodVars ? [methodVars] : [];
+                }
+                for (key in omnitureVars) {
+                    cache[key] = window.s[key] || '';
+                    window.s[key] = omnitureVars[key];
+                }
+                try {
+                    window.s[method].apply(window.s, methodVars);
+                } catch (e) {
+                }
+                for (key in cache) {
+                    window.s[key] = cache[key];
+                }
                 return obj;
             };
             return obj;
@@ -176,11 +199,12 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 if(angular.isString(query)){
                     query = query.replace(new RegExp('\\s*' + (queryDelimiter || ';') + '\\s*$'), '');
                     params = query.split(new RegExp('\\s*' + (queryDelimiter || ';') + '\\s*', 'g'));
-                };
+                }
                 var method = params.length && !angular.isUndefined(obj.providers[params[0]]) && params[0];
                 log(query, label, style(method));                
                 method && obj.providers[method].apply(obj.providers, params.slice(1));
-            }catch(e){};
+            } catch (e) {
+            }
             return obj;
         };
         
@@ -190,7 +214,7 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 gaQuery()(method, key, value);
             }else{
                 gaQuery()(method, key);
-            };
+            }
             return obj;
         };
         return obj;
@@ -209,23 +233,29 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
         var instance = new core(options.account, options.vars, options.tracker, options.referrer, options.isolate).init();
         var funnel = [], tracker = function(k, map, skipDoubleTrack){
             // Track
-            if(options.disabled || !options.data.tracks || angular.isUndefined(options.data.tracks[k]) || (skipDoubleTrack && funnel.length && funnel[funnel.length - 1] == k)){return tracker;};
+            if (options.disabled || !options.data.tracks || angular.isUndefined(options.data.tracks[k]) || (skipDoubleTrack && funnel.length && funnel[funnel.length - 1] == k)) {
+                return tracker;
+            }
             var query = options.data.tracks[k];
             if(angular.isObject(map)){
-                for(var i in map){query = query.replace(new RegExp('\{\{' + i + '\}\}', 'g'), map[i]);};
+                for (var i in map) {
+                    query = query.replace(new RegExp('\{\{' + i + '\}\}', 'g'), map[i]);
+                }
                 query = query.replace(/\{\{[a-zA-Z0-9]+\}\}/g, '');
             }else{
                 map = query.indexOf('img') == 0 ? (new Date()).getTime() :  map || '';
                 query = query.replace(/\{\{[a-zA-Z0-9]+\}\}/g, map);
-            };
+            }
             var isFunnel = query.length && query.charAt(0) == '~';
             if(isFunnel){
                 query = query.substring(1);
                 funnel.push(k);
-            };
+            }
             instance.track(query, options.delimiter, k);
             // Funnel
-            if(!options.data.funnel || !isFunnel){return tracker;};
+            if (!options.data.funnel || !isFunnel) {
+                return tracker;
+            }
             var r, stack = funnel.join(options.delimiter);
             for(var i in options.data.funnel){
                 r = i
@@ -238,8 +268,8 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     query = query.replace(new RegExp('\{\{[a-zA-Z0-9]+\}\}', 'g'), map);
                     instance.track(query, options.delimiter, 'Funnel');
                     break;
-                };
-            };
+                }
+            }
             return tracker;
         };
 
@@ -255,15 +285,15 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                             });
                         }else{
                             tracker.apply({}, args);
-                        };
+                        }
                     }else if(angular.isString(args) && args.length){
                         tracker(args, null, false);
                     }else{
                         tracker(attributes[options.tracker], null, false);
-                    };
+                    }
                 });
             };
-        })
+        });
 
         return {instance:instance, tracker:tracker};
     };

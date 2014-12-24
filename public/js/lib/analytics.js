@@ -31,8 +31,8 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     list.push('["' + gaTracker('_setCustomVar') + '",' + (++slot) + ',"' + key + '","' + vars[key] + '",2]');
                 }else{
                     list.push([gaTracker('_setCustomVar'), ++slot, key, String(vars[key]), 2]);
-                };
-            };
+                }
+            }
             return isStr ? list.join(',') : list;
         };
         var gaDelVars = function(vars, isStr){
@@ -42,17 +42,19 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     list.push('["' + gaTracker('_deleteCustomVar') + '",' + (++slot) + ']');
                 }else{
                     list.delCvars([gaTracker('_deleteCustomVar'), ++slot]);
-                };
-            };
+                }
+            }
             return isStr ? list.join(',') : list;
         };
         var echo = function(){
-            if(angular.isUndefined(window['console'])){return;};
+            if (angular.isUndefined(window['console'])) {
+                return;
+            }
             if(angular.isFunction(window.console['log'])){
                 window.console.log.apply(window.console, arguments);
             }else{
                 for(var i = 0, j = arguments.length; i < j; i++){window.console.log(arguments[i]);}
-            };
+            }
         };
         var log = function(query, label, style){
             query = angular.isString(query) ? query : angular.toJson(query);
@@ -65,7 +67,7 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 case 'omniture': return 'background:#f3e8f5;color:#9948a7';
                 case 'event': return 'background:#cfc;color:#399839';
                 default: return 'background:#e1e1e1;color:#4e4e4e';
-            };
+            }
         };
         var event = function(obj, type, fn){
             if(obj.addEventListener){
@@ -77,7 +79,7 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 obj['on' + type] = function(e){origHandler(e); return fn(e);};
             }else{
                 obj['on' + type] = fn;
-            };
+            }
         };
 
         obj.init = function(){
@@ -92,7 +94,9 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     isolator.style.border = 'none';
                     isolator.scrolling = isolator.frameBorder = 'no';
                     event(isolator, 'load', function(){
-                        if(isInit){return;};
+                        if (isInit) {
+                            return;
+                        }
                         isInit = true;
                         try{
                             //isolator.contentWindow.document.open();
@@ -105,7 +109,8 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                             );                            
                             isolator.contentWindow.document.writeln('<script src="' + ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js" async="true"></' + 'script>');
                             //isolator.contentWindow.document.close();
-                        }catch(e){};
+                        } catch (e) {
+                        }
                     });
                     isolator.src = angular.isString(isolate) ? isolate : 'about:blank';
                     document.body.appendChild(isolator);
@@ -122,9 +127,9 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     s.type = 'text/javascript';
                     s.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                     document.getElementsByTagName('head')[0].appendChild(s);
-                };
+                }
                 isInit = true;
-            };
+            }
             return obj;
         };
 
@@ -148,17 +153,35 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     img.style.left = '-1000px';
                     img.style.top = '-1000px';
                     img.src = src;
-                };
+                }
                 return obj;
             };
             obj.omniture = function(omnitureVars, method, methodVars){
-                if(angular.isUndefined(window['s']) || !angular.isFunction(window.s[method])){return obj;};
+                if (angular.isUndefined(window['s']) || !angular.isFunction(window.s[method])) {
+                    return obj;
+                }
                 var cache = {};
-                try{omnitureVars = (angular.isString(omnitureVars) ? angular.fromJson(omnitureVars) : omnitureVars) || {};}catch(e){omnitureVars = {};};
-                try{methodVars = (angular.isString(methodVars) ? angular.fromJson(methodVars) : methodVars) || [];}catch(e){methodVars = methodVars ? [methodVars] : [];};
-                for(key in omnitureVars){cache[key] = window.s[key] || ''; window.s[key] = omnitureVars[key];};
-                try{window.s[method].apply(window.s, methodVars);}catch(e){};
-                for(key in cache){window.s[key] = cache[key];};
+                try {
+                    omnitureVars = (angular.isString(omnitureVars) ? angular.fromJson(omnitureVars) : omnitureVars) || {};
+                } catch (e) {
+                    omnitureVars = {};
+                }
+                try {
+                    methodVars = (angular.isString(methodVars) ? angular.fromJson(methodVars) : methodVars) || [];
+                } catch (e) {
+                    methodVars = methodVars ? [methodVars] : [];
+                }
+                for (key in omnitureVars) {
+                    cache[key] = window.s[key] || '';
+                    window.s[key] = omnitureVars[key];
+                }
+                try {
+                    window.s[method].apply(window.s, methodVars);
+                } catch (e) {
+                }
+                for (key in cache) {
+                    window.s[key] = cache[key];
+                }
                 return obj;
             };
             return obj;
@@ -170,11 +193,12 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                 if(angular.isString(query)){
                     query = query.replace(new RegExp('\\s*' + (queryDelimiter || ';') + '\\s*$'), '');
                     params = query.split(new RegExp('\\s*' + (queryDelimiter || ';') + '\\s*', 'g'));
-                };
+                }
                 var method = params.length && !angular.isUndefined(obj.providers[params[0]]) && params[0];
                 method && obj.providers[method].apply(obj.providers, params.slice(1));
                 log(query, label, style(method));
-            }catch(e){};
+            } catch (e) {
+            }
             return obj;
         };
         return obj;
@@ -193,23 +217,29 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
         var instance = new core(options.account, options.vars, options.tracker, options.referrer, options.isolate).init();
         var funnel = [], tracker = function(k, map, skipDoubleTrack){
             // Track
-            if(!options.data.tracks || angular.isUndefined(options.data.tracks[k]) || (skipDoubleTrack && funnel.length && funnel[funnel.length - 1] == k)){return tracker;};
+            if (!options.data.tracks || angular.isUndefined(options.data.tracks[k]) || (skipDoubleTrack && funnel.length && funnel[funnel.length - 1] == k)) {
+                return tracker;
+            }
             var query = options.data.tracks[k];
             if(angular.isObject(map)){
-                for(var i in map){query = query.replace(new RegExp('\{\{' + i + '\}\}', 'g'), map[i]);};
+                for (var i in map) {
+                    query = query.replace(new RegExp('\{\{' + i + '\}\}', 'g'), map[i]);
+                }
                 query = query.replace(/\{\{[a-zA-Z0-9]+\}\}/g, '');
             }else{
                 map = query.indexOf('img') == 0 ? (new Date()).getTime() :  map || '';
                 query = query.replace(/\{\{[a-zA-Z0-9]+\}\}/g, map);
-            };
+            }
             var isFunnel = query.length && query.charAt(0) == '~';
             if(isFunnel){
                 query = query.substring(1);
                 funnel.push(k);
-            };
+            }
             instance.track(query, options.delimiter, k);
             // Funnel
-            if(!options.data.funnel || !isFunnel){return tracker;};
+            if (!options.data.funnel || !isFunnel) {
+                return tracker;
+            }
             var r, stack = funnel.join(options.delimiter);
             for(var i in options.data.funnel){
                 r = i
@@ -222,8 +252,8 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                     query = query.replace(new RegExp('\{\{[a-zA-Z0-9]+\}\}', 'g'), map);
                     instance.track(query, options.delimiter, 'Funnel');
                     break;
-                };
-            };
+                }
+            }
             return tracker;
         };
 
@@ -239,15 +269,15 @@ var compileProvider; (window.app || (window.app = angular.module('app', [])))
                             });
                         }else{
                             tracker.apply({}, args);
-                        };
+                        }
                     }else if(angular.isString(args) && args.length){
                         tracker(args, null, false);
                     }else{
                         tracker(attributes[options.tracker], null, false);
-                    };
+                    }
                 });
             };
-        })
+        });
 
         return tracker;
     };

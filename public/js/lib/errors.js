@@ -34,9 +34,9 @@
         if(window.jQuery){
             jQuery.error = window.onjQueryError;
             jQuery.ajaxSetup({error: window.onjQueryAjaxError});
-        };
-    };
-}]);
+        }
+    }
+    }]);
 
 //------------------------------------------------------ end
 }(angular);

@@ -16,7 +16,7 @@
         var list = []; count = count * 1;
         for(var i = 0; i < count; i++){
             list.push(item());
-        };
+        }
         return list;
     };
     

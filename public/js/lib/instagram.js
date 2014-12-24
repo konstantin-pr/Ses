@@ -52,7 +52,7 @@
             fun(deferred);
         }else{
             resolve(deferred);
-        };
+        }
         return deferred.promise;
     };
     
@@ -63,7 +63,12 @@
         s.clr = function(){s.store = {};};
         s.get = function(k){return typeof(s.store[k]) != 'undefined' ? s.store[k] : null;};
         s.set = function(k, v){s.use && (s.store[k] = v); return s;};
-        s.del = function(k){if(typeof(s.store[k]) != 'undefined'){delete s.store[k];}; return s;};
+        s.del = function (k) {
+            if (typeof(s.store[k]) != 'undefined') {
+                delete s.store[k];
+            }
+            return s;
+        };
         s.disable = function(){s.use = false; return !s.use;};
         s.enable = function(){s.use = true;return !s.use;};
         return s;
@@ -85,10 +90,10 @@
                     self.cache.set(key, response);
                     resolve(deferred, response, callback);
                 }, function(){reject(deferred, null, callback);});
-            };
+            }
         }else{
             return reject(deferred, null, callback);
-        };
+        }
         return deferred.promise;
     };
 
@@ -119,7 +124,7 @@
                         .set('ig-disconnect', true)
                         .push();
                         reject(deferred, '', callback);
-                    };
+                    }
                     w.close();
                     window[p] = null;
                     delete window[p];
@@ -129,7 +134,7 @@
                 window[p] = c;
             }else{
                 resolve(deferred, self.token, callback);
-            };
+            }
         });
     };
     
@@ -184,7 +189,7 @@
                 });
             }else{
                 resolve(d, data, callback);
-            };
+            }
         };
         return produce(function(deferred){
             self.photos().then(function(response){
@@ -196,7 +201,9 @@
     };    
     
     self.init = function(){
-        if(!$options.appId){return false;};
+        if (!$options.appId) {
+            return false;
+        }
         $tools.tags
         .set('ig-app-' + $options.appId, true)
         .set('ig-disconnect', true)

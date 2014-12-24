@@ -58,7 +58,7 @@
             fun(deferred);
         }else{
             resolve(deferred);
-        };
+        }
         return deferred.promise;
     },
     
@@ -75,15 +75,14 @@
                     $cookie.del(name);
                 }else{
                     delete storage[name];
-                };
+                }
             }else{
                 if(self.useCookie){
                     token = $cookie.get(name);
                 }else{
                     token = storage[name] || '';
-                };
-            };
-            
+                }
+            }
             if(!token){
                 broadcast('open', {origin:origin});
                 
@@ -103,14 +102,13 @@
                             $cookie.set(name, token, expires * 1000);
                         }else{
                             storage[name] = token;
-                        };
+                        }
                         broadcast('allow', {origin:origin, token:token});
                         resolve(deferred, token, callback);
                     }else{
                         broadcast('deny', {origin:origin, params:params});
                         reject(deferred, params, callback);
-                    };
-                    
+                    }
                     w.close();
                     window[options.state] = null;
                     delete window[options.state];
@@ -120,12 +118,13 @@
                 setTimeout(function(){
                     if(angular.isFunction(window[options.state])){
                         window[options.state]('timeout');
-                    };}, 30000
+                    }
+                    }, 30000
                 );
                 window[options.state] = c;
             }else{
                 resolve(deferred, token, callback);
-            };
+            }
         });
     };
     

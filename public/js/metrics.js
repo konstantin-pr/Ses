@@ -42,7 +42,9 @@
 
     //Views
     $rootScope.$on('$routeChangeSuccess', function(e, next, current){
-        if(!next.$$route){return;};
+        if (!next.$$route) {
+            return;
+        }
         $rootScope.track
         ('view', $location.path(), true)
         ('page_' + $location.path().replace(/^\/+/, ''), null, true);

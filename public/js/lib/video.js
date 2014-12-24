@@ -53,7 +53,7 @@
             fun(deferred);
         }else{
             resolve(deferred);
-        };
+        }
         return deferred.promise;
     };
     
@@ -70,8 +70,8 @@
             case 'vine':
 				url += 'vine.co/v/' + id + '/embed/simple?audio=' + (autoplay ? '1' : '0');
 			break;
-		};
-		return url;
+        }
+        return url;
 	};
     
     self.videoHtml = function(provider, id, width, height, autoplay){
@@ -84,10 +84,10 @@
         iframe.id = id;
         iframe.width = width;
         iframe.height = height;
-        iframe.frameborder = '0'
-        iframe.webkitAllowFullScreen = '1'
-        iframe.mozallowfullscreen = '1'
-        iframe.allowfullscreen = '1'
+        iframe.frameborder = '0';
+        iframe.webkitAllowFullScreen = '1';
+        iframe.mozallowfullscreen = '1';
+        iframe.allowfullscreen = '1';
         iframe.onload = function(){
             var fix, t = 1; broadcast('load', {provider:provider, id:id});
             if(autoplay){
@@ -95,7 +95,7 @@
                     t && broadcast('play', {provider:provider, id:id, autoplay:autoplay});
                     t = 0;
                 }, 1000);
-            };
+            }
             var player = null;
             switch(provider){
                 case 'youtube':
@@ -107,11 +107,11 @@
                                     if(fix){
                                         $timeout.cancel(fix);
                                         fix = null;
-                                    };
+                                    }
                                     broadcast(t ? 'play' : 'continue', {provider:provider, id:id, autoplay:autoplay}); t = 0;
                                 }else if(e.data == YT.PlayerState.ENDED || e.data == YT.PlayerState.PAUSED){
                                     broadcast(e.data == YT.PlayerState.ENDED ? 'end' : 'pause', {provider:provider, id:id, autoplay:autoplay});
-                                };
+                                }
                             }
                         }
                     });
@@ -120,7 +120,7 @@
                 case 'vimeo':
                     if(autoplay){
                         broadcast('play', {provider:provider, id:id, autoplay:autoplay}); t = 0;
-                    };
+                    }
                     player = $f(iframe);
                     player.addEvent('ready', function(){
                         player.addEvent('pause', function(){broadcast('pause', {provider:provider, id:id, autoplay:autoplay})});
@@ -131,7 +131,7 @@
                 break;
                 case 'vine':
                 break;
-            };
+            }
         };
         iframe.src = self.videoUrl(provider, id, autoplay);
         return iframe;
@@ -152,14 +152,16 @@
                 isAPI[provider] = true;
             };
             document.getElementsByTagName('head')[0].appendChild(script);
-        };
+        }
     };
     
     var _call = function(player, methods){
         angular.forEach(methods, function(method){
             try{
-                angular.isFunction(player[method]) && player[method](); 
-            }catch(e){};
+                angular.isFunction(player[method]) && player[method]();
+
+            } catch (e) {
+            }
         });
     };    
     
@@ -169,7 +171,7 @@
             typeof(self._players[id]) != 'undefined' && _call(self._players[id], m);
         }else{
             angular.forEach(self._players, function(player){_call(player, m);});
-        };
+        }
     };
     
     self.pause = function(id){
@@ -178,7 +180,7 @@
             typeof(self._players[id]) != 'undefined' && _call(self._players[id], m);
         }else{
             angular.forEach(self._players, function(player){_call(player, m);});
-        };    
+        }
     };
     
     self.destroy = function(id){
@@ -191,7 +193,7 @@
                 _call(player, m);
                 delete self._players[id];
             });
-        };    
+        }
     };    
     
     self.init = function(){
@@ -215,7 +217,9 @@
             $video.addProvider(attributes.provider);
             var insertVideo = function(autoplay){
                 $video.destroy(attributes.appVideo);
-                while($element[0].firstChild){$element[0].removeChild($element[0].firstChild);};
+                while ($element[0].firstChild) {
+                    $element[0].removeChild($element[0].firstChild);
+                }
                 $element[0].appendChild($video.videoIframe(attributes.provider, attributes.appVideo, '100%', '100%', autoplay || false));
             };
             var insertHtml = function(html){
@@ -232,7 +236,7 @@
                     insertVideo(attributes.autoplay || false);
                 });
                 insertVideo(attributes.autoplay || false);
-            };
+            }
         }
     };
 }])

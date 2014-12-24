@@ -17,7 +17,7 @@
                 if(!response || !response.data.success){
                     deferred.reject((response && response.data.error && response.data.error.message) || 'Something went wrong!');
                     return;
-                };
+                }
                 deferred.resolve(response.data.data || null);
             });
             return deferred.promise;
@@ -29,7 +29,7 @@
                 if(!response || !response.data.success){
                     deferred.reject((response && response.data.error && response.data.error.message) || 'Something went wrong!');
                     return;
-                };
+                }
                 var list = response.data.data.list || [];
                 angular.forEach(list, function(v, k){v.offset = options.offset + k;});
                 deferred.resolve({
@@ -42,7 +42,7 @@
         
         return g;
     }).call({})
-}])
+}]);
 
 //------------------------------------------------------ end
 }(angular);

@@ -8,18 +8,18 @@
 			});
 		}else{
 			throw new Error('not supported or DOM not loaded');
-		};
-	};   
+		}
+	}
 	function addResizeEvent(fn){
 		var timeout;
 		addEvent(window, 'resize', function(){
 			if(timeout){
 				clearTimeout(timeout);
-			};
+			}
 			timeout = setTimeout(fn, 100);						
 		});
-	};   
-   	if(false && /*FIX*/ document.documentElement.getBoundingClientRect){
+	}
+	if(false && /*FIX*/ document.documentElement.getBoundingClientRect){
 		var getOffset = function(el){
 			var box = el.getBoundingClientRect();
 			var doc = el.ownerDocument;
@@ -31,11 +31,11 @@
 			if(body.getBoundingClientRect){
 				var bound = body.getBoundingClientRect();
 				zoom =(bound.right - bound.left) / body.clientWidth;
-			};
+			}
 			if(zoom > 1){
 				clientTop = 0;
 				clientLeft = 0;
-			};
+			}
 			var top = box.top / zoom + (window.pageYOffset || docElem && docElem.scrollTop / zoom || body.scrollTop / zoom) - clientTop, left = box.left / zoom +(window.pageXOffset || docElem && docElem.scrollLeft / zoom || body.scrollLeft / zoom) - clientLeft;
 			return {top: top, left: left};
 		};		
@@ -52,7 +52,7 @@
 				top: top
 			};
 		};
-	};
+	}
 	function getBox(el){
 		var left, right, top, bottom;
 		var offset = getOffset(el);
@@ -66,14 +66,14 @@
 			top: top,
 			bottom: bottom
 		};
-	};
+	}
 	function addStyles(el, styles){
 		for(var name in styles){
 			if(styles.hasOwnProperty(name)){
 				el.style[name] = styles[name];
-			};
-		};
-	};
+			}
+		}
+	}
 	function copyLayout(from, to, leftTop){
 		var box = leftTop ? {left: 0, top: 0, right: from.offsetWidth, bottom: from.offsetHeight} : getBox(from);
 		addStyles(to,{
@@ -82,8 +82,9 @@
 			top: box.top + 'px',
 			width: from.offsetWidth + 'px',
 			height: from.offsetHeight + 'px'
-		});		
-	};
+		});
+
+	}
 	var toElement =(function(){
 		var div = document.createElement('div');
 		return function(html){
@@ -100,28 +101,31 @@
 	})();		
 	function fileFromPath(file){
 		return file.replace(/.*(\/|\\)/, '');
-	};
+	}
 	function getExt(file){
 		return(-1 !== file.indexOf('.')) ? file.replace(/.*[.]/, '') : '';
-	};
+	}
 	function hasClass(el, name){		
 		var re = new RegExp('\\b' + name + '\\b');		
 		return re.test(el.className);
-	};   
+	}
 	function addClass(el, name){
 		if(!hasClass(el, name)){   
 			el.className = el.className.replace(/^\s+|\s+$/g, '') + ' ' + name;
-		};
-	};  
+		}
+	}
 	function removeClass(el, name){
 		var re = new RegExp('\\b' + name + '\\b');				
-		el.className = el.className.replace(re, '');		
-	};
+		el.className = el.className.replace(re, '');
+
+	}
 	function removeNode(el){
 		el.parentNode.removeChild(el);
-	};
+	}
 	window.AjaxUploader = function(button, options){
-		if(!button){return null;};
+		if (!button) {
+			return null;
+		}
 		this._settings = {
 			// Location of the server-side upload script
 			action: 'upload.php',
@@ -159,13 +163,14 @@
 		for(var i in options){
 			if(options.hasOwnProperty(i)){
 				this._settings[i] = options[i];
-			};
-		};
+			}
+		}
 		button.jquery && (button = button[0]);
 		if(typeof button == 'string'){
 			if(/^#.*/.test(button)){
-				button = button.slice(1);				
-			};
+				button = button.slice(1);
+
+			}
 			button = document.getElementById(button);
 		}if(!button || button.nodeType !== 1){
 			throw new Error('Please make sure that you\'re passing a valid element'); 
@@ -175,7 +180,7 @@
 					e.preventDefault();
 				}else if(window.event){
 					window.event.returnValue = false;
-				};
+				}
 			});
 		}
 		this.isMobile = navigator.userAgent.match(/iphone|ipad|ipod|android|blackberry|opera mini|iemobile|mobile/i);
@@ -201,10 +206,10 @@
 			var nodeName = this._button.nodeName.toUpperCase();			
 			if(nodeName == 'INPUT' || nodeName == 'BUTTON'){
 				this._button.setAttribute('disabled', 'disabled');
-			};
+			}
 			if(this._input && this._input.parentNode){
 				this._input.parentNode.style.visibility = 'hidden';
-			};
+			}
 		},
 		enable: function(){
 			removeClass(this._button, this._settings.disabledClass);
@@ -238,21 +243,22 @@
 			if(div.style.opacity !== '0'){
 				if(typeof(div.filters) == 'undefined'){
                     throw new Error('Opacity not supported by the browser');
-				};
+				}
 				div.style.filter = 'alpha(opacity=0)';
-			};		  
+			}
 			addEvent(input, 'change', function(){
 				if(!input || input.value === ''){				
-					return;				
-				};
+					return;
+
+				}
 				var file = fileFromPath(input.value);
 				if(false === self._settings.onChange.call(self, file, getExt(file))){
 					self._clearInput();				
 					return;
-				};
+				}
 				if(self._settings.autoSubmit){
 					self.submit();
-				};
+				}
 			});			
 			addEvent(input, 'mouseover', function(){
 				addClass(self._button, self._settings.hoverClass);
@@ -261,7 +267,7 @@
 				removeClass(self._button, self._settings.hoverClass);
 				if(!self.isMobile && input.parentNode){
 					input.parentNode.style.visibility = 'hidden';
-				};
+				}
 			});   
 			div.appendChild(input);
 			this._input = input;
@@ -271,12 +277,12 @@
 				this._button.style.overflow = 'hidden';
 			}else{
 				document.body.appendChild(div);
-			};
+			}
 		},
 		_clearInput : function(){
 			if(!this._input){
 				return;
-			};	   
+			}
 			removeNode(this._input.parentNode);
 			this._input = null;																   
 			this._createInput();
@@ -286,10 +292,10 @@
 			var self = this;
 			if(self._disabled){
 				return;
-			};
+			}
 			if(!self._input){
 				self._createInput();
-			};
+			}
 			var div = self._input.parentNode;							
 			copyLayout(self._button, div, self._settings.encapsulate);
 			div.style.visibility = 'visible';
@@ -299,10 +305,10 @@
 			addEvent(self._button, 'mouseover', function(){
 				if(self._disabled){
 					return;
-				};
+				}
 				if(!self._input){
 					self._createInput();
-				};
+				}
 				var div = self._input.parentNode;							
 				copyLayout(self._button, div, self._settings.encapsulate);
 				div.style.visibility = 'visible';
@@ -332,8 +338,8 @@
 						el.setAttribute('name', 'request[' + prop + ']');
 						el.setAttribute('value', settings.data[prop]);
 						form.appendChild(el);
-					};
-				};
+					}
+				}
 			}else{
 				for(var prop in settings.data){
 					if(settings.data.hasOwnProperty(prop)){
@@ -342,9 +348,9 @@
 						el.setAttribute('name', prop);
 						el.setAttribute('value', settings.data[prop]);
 						form.appendChild(el);
-					};
-				};
-			};
+					}
+				}
+			}
 			return form;
 		},
 		_getResponse : function(iframe, file){
@@ -362,17 +368,17 @@
 							setTimeout(function(){
 								removeNode(iframe);
 							}, 0);
-						};
-						return;
-				};
+						}
+					return;
+				}
 				self._settings.progressClass && removeClass(self._button, self._settings.progressClass);
 				var doc = iframe.contentDocument ? iframe.contentDocument : window.frames[iframe.id].document;
 				if(doc.readyState && doc.readyState != 'complete'){
 				   return;
-				};
+				}
 				if(doc.body && doc.body.innerHTML == "false"){
 					return;
-				};
+				}
 				var response;
 				if(doc.XMLDocument){
 					response = doc.XMLDocument;
@@ -381,18 +387,19 @@
 					if(settings.responseType && settings.responseType.toLowerCase() == 'json'){
 						if(doc.body.firstChild && doc.body.firstChild.nodeName.toUpperCase() == 'PRE'){
 							response = doc.body.firstChild.firstChild.nodeValue;
-						};
+						}
 						if(response){
 							try{
 								response = eval('(' + response + ')');
-							}catch(e){};
+							} catch (e) {
+							}
 						}else{
 							response = {};
-						};
+						}
 					}
 				}else{
 					response = doc;
-				};
+				}
 				settings.onComplete.call(self, file, response);
 				toDeleteFlag = true;
 				// Fix IE mixed content issue
@@ -402,15 +409,16 @@
 		submit: function(){	
 			var self = this, settings = this._settings;
 			if(!this._input || this._input.value === ''){				
-				return;				
-			};
+				return;
+
+			}
 			this._input.setAttribute('name', this._settings.name);
 			var file = fileFromPath(this._input.value);
 			if(false === settings.onSubmit.call(this, file, getExt(file))){
 				this._clearInput();
                 this.isMobile && this._rerouteClicksEx();
 				return;
-			};
+			}
 			var iframe = this._createIframe();
 			var form = this._createForm(iframe);
 			removeNode(this._input.parentNode);

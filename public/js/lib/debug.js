@@ -11,7 +11,10 @@
     
     self.bar = null;
     self.init = function(bar){
-        var tmpl = '', obj = {}; if(self.bar){return;};
+        var tmpl = '', obj = {};
+        if (self.bar) {
+            return;
+        }
         angular.forEach(bar, function(value){
             var id = 'appDebugBar_' + String((new Date).getTime()) + Math.round(Math.random() * 1000000); obj[id] = value;
             tmpl += '<li ng-click="action(\'' + id + '\');">' + value.title + '</li>';
@@ -31,7 +34,9 @@
     
     $scope.action = function(id){
         var action = bar[id] && bar[id].action;
-        if(!action){return;};
+        if (!action) {
+            return;
+        }
         if(angular.isFunction(action)){
             var result = action.call();
             result && (angular.isString(result) ? alert(result) : console.log(result));
@@ -40,10 +45,12 @@
                 return prompt('Please enter "' + str.replace(/[{}]/g, '') + '":');
             });
             $http.post(action).then(function(response){
-                if(!response || !response.data.success){return;};
+                if (!response || !response.data.success) {
+                    return;
+                }
                 response.data.data && (angular.isString(response.data.data) ? alert(response.data.data) : console.log(response.data.data));
 			});
-        };
+        }
     };
 }])
 

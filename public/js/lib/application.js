@@ -20,7 +20,9 @@
     var v = function(){
         var n = navigator.appName, u = navigator.userAgent, t;
         var m = u.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
-        if(m && (t = u.match(/version\/([\.\d]+)/i)) != null){m[2] = t[1];};
+        if (m && (t = u.match(/version\/([\.\d]+)/i)) != null) {
+            m[2] = t[1];
+        }
         m = m ? [m[1], m[2]] : [n, navigator.appVersion, '-?'];
         return m;
     };
@@ -32,16 +34,30 @@
     else if(/palm/.test(a))                       {r.name = 'palm'; r.os = 'PalmOS'; r.device = 'mobile';}
     else if(/win/.test(a))                        {r.name = 'windows'; r.os = 'WindowsOS';}
     else if(/mac/.test(a))                        {r.name = 'mac'; r.os = 'MacOS';}
-    else if(/linux/.test(a))                      {r.name = 'linux'; r.os = 'LinuxOS';};
-    if(/mobile/.test(a))                          {r.device = 'mobile'; r.name == 'windows' && (r.os = 'WindowsPhoneOS');};
-    if(/webkit/.test(a))                          {r.engine = 'webkit'; r.jsPrefix = 'webkit'; r.cssPrefix = '-webkit-'; r.transition = true;}
+    else if (/linux/.test(a)) {
+        r.name = 'linux';
+        r.os = 'LinuxOS';
+    }
+        if (/mobile/.test(a)) {
+            r.device = 'mobile';
+            r.name == 'windows' && (r.os = 'WindowsPhoneOS');
+        }
+        if(/webkit/.test(a))                          {r.engine = 'webkit'; r.jsPrefix = 'webkit'; r.cssPrefix = '-webkit-'; r.transition = true;}
     else if(/opera/.test(a))                      {r.browser = 'opera'; r.engine = 'opera'; r.jsPrefix = 'O'; r.cssPrefix = '-o-';}
     else if(/msie/.test(a))                       {r.browser = 'msie'; r.engine = 'msie'; r.jsPrefix = 'ms'; r.cssPrefix = '-ms-';}
-    else if(/firefox/.test(a))                    {r.browser = 'firefox'; r.engine = 'mozilla'; r.jsPrefix = 'Moz'; r.cssPrefix = '-moz-';};
-    if(/safari/.test(a))                          {r.browser = 'safari';};
-    if(/chrome/.test(a))                          {r.browser = 'chrome';};
-    
-    r.webkit = (/applewebkit\/([\d.]+)/.exec(a) || [0,0])[1];
+    else if (/firefox/.test(a)) {
+        r.browser = 'firefox';
+        r.engine = 'mozilla';
+        r.jsPrefix = 'Moz';
+        r.cssPrefix = '-moz-';
+    }
+        if (/safari/.test(a)) {
+            r.browser = 'safari';
+        }
+        if (/chrome/.test(a)) {
+            r.browser = 'chrome';
+        }
+        r.webkit = (/applewebkit\/([\d.]+)/.exec(a) || [0,0])[1];
     r.webkitInt = parseInt(r.webkit, 10) || 0;
     r.webkitFloat = parseFloat(r.webkit, 10) || 0;
     r.version = parseInt(v()[1], 10);
@@ -72,12 +88,16 @@
         var prefix = name + '=', begin = document.cookie.indexOf('; ' + prefix);
         if(begin == -1){
             begin = document.cookie.indexOf(prefix);
-            if(begin != 0){return null;};
+            if (begin != 0) {
+                return null;
+            }
         }else{
             begin += 2;
-        };
+        }
         var end = document.cookie.indexOf(';', begin);
-        if(end == -1){end = document.cookie.length;};
+        if (end == -1) {
+            end = document.cookie.length;
+        }
         var value = document.cookie.substring(begin + prefix.length, end);
         return value ? decodeURIComponent(decodeURI(value)) : '';
     };
@@ -87,7 +107,7 @@
             (path ? '; path=' + path : '') +
             (domain ? '; domain=' + domain : '') +
             '; expires=Thu, 01-Jan-70 00:00:01 GMT';
-        };
+        }
         return obj;
     };
     app.$Cookie = obj;
@@ -100,30 +120,38 @@
         return Boolean(window['localStorage'] || false);
     };
     obj.save = function(key, value, saveEmpty){
-        if(!obj.is){return false;};
+        if (!obj.is) {
+            return false;
+        }
         try{
             if(value || saveEmpty){
                 localStorage.setItem(key, angular.toJson(value));
             }else{
                 localStorage.removeItem(key);
-            };
+            }
         }catch(e){
             // 5 MB quota
-        };
+        }
         return obj;
     };
     obj.load = function(key){
-        if(!obj.is){return null;};
+        if (!obj.is) {
+            return null;
+        }
         var str = localStorage.getItem(key);
         return str ? angular.fromJson(str) : undefined;
     };
     obj.delete = function(key){
-        if(!obj.is){return null;};
+        if (!obj.is) {
+            return null;
+        }
         localStorage.removeItem(key);
         return obj;
     };
     obj.clear = function(){
-        if(!obj.is){return null;};
+        if (!obj.is) {
+            return null;
+        }
         localStorage.clear();
         return obj;
     };
@@ -144,18 +172,23 @@
             }else if(!value && tags[name]){
                 delete tags[name];
                 el.removeClass('app-' + name);
-            };
+            }
             return obj;
         };
         obj.get = function(name){
             return !!tags[name];
         };
         obj.del = function(mask){
-            for(var name in tags){name.indexOf(mask) >= 0 && obj.set(name, false);};
+            for (var name in tags) {
+                name.indexOf(mask) >= 0 && obj.set(name, false);
+            }
             return obj;
         };
         obj.all = function(prefix){
-            var data = ['']; for(var name in tags){data.push(name)};
+            var data = [''];
+            for (var name in tags) {
+                data.push(name)
+            }
             return data.join(' ' + (prefix == undefined ? 'app-' : prefix)).substring(1);            
         };
         obj.list = function(){
@@ -169,11 +202,11 @@
             var result = [];
             for(var key in obj){
                 var value = obj[key] == null ? '' : obj[key];
-                var key = prefix ? prefix + '[' + key + ']' : key
+                var key = prefix ? prefix + '[' + key + ']' : key;
                 value != 'undefined' && result.push(
                     angular.isObject(value) ? (json ? key + '=' + encodeURIComponent(angular.toJson(value)) : serialize(value, key)) : key + '=' + encodeURIComponent(value)
                 );
-            };
+            }
             return result.join('&');
         };
         return serialize(data);
@@ -190,7 +223,7 @@
                 result[key].push(value);
             }else{
                 result[key] = value;
-            };
+            }
         });
         return result;
     };
@@ -201,11 +234,13 @@
     
     self.strMap = function(str, map){
         if(angular.isObject(map)){
-            for(var i in map){str = str.replace(new RegExp('\{\{' + i + '\}\}', 'g'), map[i]);};
+            for (var i in map) {
+                str = str.replace(new RegExp('\{\{' + i + '\}\}', 'g'), map[i]);
+            }
             str = str.replace(/\{\{[a-zA-Z0-9]+\}\}/, '');
         }else{
             str = str.replace(/\{\{[a-zA-Z0-9]+\}\}/g, map);
-        };
+        }
         return str;
     };
 
@@ -220,7 +255,9 @@
     self.getRange = function(start, end){
         start *= 1; end *= 1;
         var arr = [], dec = end < start;
-        while(start != (dec ? end - 1 : end + 1)){arr.push(dec ? start-- : start++);};
+        while (start != (dec ? end - 1 : end + 1)) {
+            arr.push(dec ? start-- : start++);
+        }
         return arr;
     };
     
@@ -238,7 +275,7 @@
             result.x += el.offsetLeft - (isScroll ? el.scrollLeft : 0);
             result.y += el.offsetTop - (isScroll ? el.scrollTop : 0);
             el = el.offsetParent;
-        };
+        }
         return result;
     };
     
@@ -260,7 +297,7 @@
             var element = document.querySelector('meta[name="viewport"]');
             content = element.getAttribute('content');
             element.setAttribute('content', str);
-        };
+        }
         return content;
     };   
 
@@ -282,7 +319,9 @@
     self.scrollToEx = function(holderSelector, contentSelector, xOffset, yOffset){
         var h = document.querySelector(holderSelector);
         var c = document.querySelector(contentSelector);
-        if(!h || !c){return;};
+        if (!h || !c) {
+            return;
+        }
         var offset = self.getElementOffset(c, h);
         h.scrollLeft = offset.x + (xOffset || 0);
         h.scrollTop = offset.y + + (yOffset || 0);
@@ -298,7 +337,7 @@
             document.writeln('<script src="' + src + '" type="text/javascript"></' + 'script>');
         }else if(/.+.css$/.test(src)){
             document.writeln('<link rel="stylesheet" type="text/css" href="' + src + '" />');
-        };
+        }
     };
     
     app.$Tools = self;
@@ -364,9 +403,17 @@
                         })
                     };
                     var escape = function(e){
-                        if(e.keyCode != 27){return;};
+                        if (e.keyCode != 27) {
+                            return;
+                        }
                         var el = popup.nextSibling;
-                        while(el){if(el.className && el.className.indexOf('popup' >= 0)){return;}else{el = el.nextSibling;};};
+                        while (el) {
+                            if (el.className && el.className.indexOf('popup' >= 0)) {
+                                return;
+                            } else {
+                                el = el.nextSibling;
+                            }
+                        }
                         angular.element(popup).scope().popupClose();
                     };
                     var duration = function(el){
@@ -379,7 +426,7 @@
                                 s['-moz-transition-duration'] ||
                                 s['-o-transition-duration']
                             ) || 0;
-                        };
+                        }
                         return 0;
                     };
                     
@@ -425,7 +472,9 @@
                             }, 100);
                         };
                         var tmp = function(){
-                            if(!popup){return;};
+                            if (!popup) {
+                                return;
+                            }
                             document.activeElement.blur();
                             popup && angular.element(popup).addClass('popup-on-close popup-animate-close');
                             callListeners('animate:close:start');
@@ -435,15 +484,17 @@
                                     angular.element(popup).one('webkitTransitionEnd msTransitionEnd mozTransitionEnd oTransitionEnd transitionend', close);
                                 }else{
                                     $timeout(close, $popupScope.popupCloseDelay || 10);
-                                };
+                                }
                             }, 100);
                         };
                         if(!noOnClose && angular.isFunction(options.onClose)){
-                            if(options.onClose.call($popupScope)){return;};
+                            if (options.onClose.call($popupScope)) {
+                                return;
+                            }
                             tmp();
                         }else{
                             tmp();
-                        };
+                        }
                     };
                     $popupScope.popupAutoClose = function(e){
                         if(
@@ -452,7 +503,7 @@
                         ){
                             if($popupScope.popupIsAutoCloseOutside && e.target.id != $popupScope.popupId){
                                 return;
-                            };
+                            }
                             var el = e.target;
                             while(el){
                                 if(el.id == $popupScope.popupId){
@@ -462,10 +513,12 @@
                                     return false;        
                                 }else{
                                     el = el.parentElement;
-                                    if(el.nodeName == 'BODY'){return;};
-                                };
-                            };
-                        };
+                                    if (el.nodeName == 'BODY') {
+                                        return;
+                                    }
+                                }
+                            }
+                        }
                     };
                     $popupScope.popupOnload = function(){
                         $tools.tags.set($popupScope.popupSkinClass, true).set($popupScope.popupInstanceClass, true);
@@ -486,7 +539,7 @@
                                     angular.element(popup).one('webkitTransitionEnd msTransitionEnd mozTransitionEnd oTransitionEnd transitionend', done);
                                 }else{
                                     $timeout(done, $popupScope.popupLoadDelay || 10);
-                                };
+                                }
                                 if(options.isFocusable){
                                     var el = angular.isDefined(popup.querySelector) ? popup.querySelector('[ng-include]') : popup;
                                     var pos = $tools.getElementOffset(el);
@@ -496,9 +549,9 @@
                                     }else{
                                         scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
                                         $window.scrollTo(0, pos.y - 20);
-                                    };
-                                };
-                            };
+                                    }
+                                }
+                            }
                         }, 100);
                         callListeners('load');
                         broadcast('load', $popupScope);
@@ -514,7 +567,7 @@
                         popupTmpl = result[0];
                         if($popupScope.popupIsFocusable){
                             scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
-                        };
+                        }
                         document.activeElement.blur();
                         document.body.appendChild(popupTmpl);
                         angular.isFunction(options.onShow) && options.onShow.call($popupScope);
@@ -523,7 +576,7 @@
                     });
                     self.count++;
                     self.countBySkin[$popupScope.popupSkinClass] = self.countBySkin[$popupScope.popupSkinClass] || 0;
-                    self.countBySkin[$popupScope.popupSkinClass]++
+                    self.countBySkin[$popupScope.popupSkinClass]++;
                     self.stack[$popupScope.popupId] = $popupScope;
                     return $popupScope;
                 },
@@ -535,21 +588,23 @@
                         angular.forEach(self.stack, function(scope){
                             scope.popupClose(noOnClose);
                         });
-                    };
+                    }
                 },
                 close: function(file, noOnClose){
                     var me = this;
                     angular.forEach(self.stack, function(scope){
                         if(scope.popupFile == file){
                             me.hide(scope.popupId, noOnClose);
-                        };
+                        }
                     });
                 }                
             }
         },
         closeTop: function(){
             var list = document.querySelectorAll('body > .popup');
-            if(!list.length){return;};
+            if (!list.length) {
+                return;
+            }
             angular.element(document.querySelectorAll('body > .popup')[list.length - 1]).scope().popupClose();
         }
     };
@@ -599,7 +654,7 @@
     .set($agent.engine, true)
     .set('webkit-' + $agent.webkitInt, true)
     .set('standalone', $agent.isStandalone)
-    .set('transition', $agent.transition)
+    .set('transition', $agent.transition);
 
     $rootScope.$on('$routeChangeStart', function(e, next, current){
         $tools.tags.set('process', true);
@@ -622,5 +677,7 @@
 }(angular);
 !function(){
     var f = function(){/* ... */};
-    if(!window.console){window.console = {log:f, info:f, warn:f, debug:f, error:f};};
+    if (!window.console) {
+        window.console = {log: f, info: f, warn: f, debug: f, error: f};
+    }
 }();

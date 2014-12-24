@@ -25,7 +25,7 @@
     $config    = $injector.get('config'),
     $agent     = $injector.get('agent'),
     $tools     = $injector.get('tools'),
-    $facebook  = $injector.get('facebook'),
+    //$facebook  = $injector.get('facebook'),
     $popup     = $injector.get('popup'),
     $timeout   = $injector.get('$timeout'),
     $rootScope = $injector.get('$rootScope');
@@ -94,8 +94,6 @@
             $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 10);
         }
     }
-
-        ($config.fb.isTab || $config.fb.isCanvas) && FB.Canvas.setAutoGrow(true);
 
 }]);
 

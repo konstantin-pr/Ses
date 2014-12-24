@@ -43,15 +43,15 @@
             fun(deferred);
         }else{
             resolve(deferred);
-        };
+        }
         return deferred.promise;
     },
     get = function(){
         for(var n in window){
             if(n.indexOf('PIN_') == 0){
                 return window[n];
-            };
-        };
+            }
+        }
         return null;
     };
     
@@ -65,7 +65,7 @@
                 self.instance = get();
             };
             document.getElementsByTagName('head')[0].appendChild(script);
-        };
+        }
     };
     
     self.instance = get();
@@ -88,7 +88,10 @@
             };
             var changeHash = '';
             var change = function(){
-                var hash = [attributes.description, attributes.url, attributes.media].join(''); if(changeHash == hash){return;};
+                var hash = [attributes.description, attributes.url, attributes.media].join('');
+                if (changeHash == hash) {
+                    return;
+                }
                 render(attributes.description, attributes.url, attributes.media);
                 changeHash = hash;
             };
@@ -113,7 +116,10 @@
             };
             var changeHash = '';
             var change = function(){
-                var hash = [attributes.description, attributes.url, attributes.media].join(''); if(changeHash == hash){return;};
+                var hash = [attributes.description, attributes.url, attributes.media].join('');
+                if (changeHash == hash) {
+                    return;
+                }
                 render(attributes.description, attributes.url, attributes.media);
                 changeHash = hash;
             };
