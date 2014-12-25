@@ -35,8 +35,8 @@
     <meta property="fb:app_id" content="<?php echo H::vars()->fb->appId; ?>" />
     <meta property="og:url" content="<?php echo H::vars()->fb->canvasUrl; ?>" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
+    <meta property="og:title" content="Share title" />
+    <meta property="og:description" content="Share description" />
     <meta property="og:image" content="<?php echo H::vars()->app->url; ?>/img/200x200.png" />
 
     <!--[if lt IE 9]>
