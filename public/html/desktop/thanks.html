@@ -6,9 +6,9 @@
 
 <p>Want another shot at winning? Tell your mates and if they win hope they pick you to join their backyard team.</p>
 
-<a ng-href="http://www.facebook.com/sharer.php?u={{config.app.url}}?app_data=callback(thanks)ref(fb)"
+<a ng-href="http://www.facebook.com/sharer.php?u={{config.app.encodedUrl}}?app_data=callback(thanks)ref(fb)"
    class="share fb" target="_blank" track="['share',{type:'fb',from:'thanks'}]"></a>
-<a ng-href="http://twitter.com/share?text=Tweet text will be here&url={{encodeURIComponent(config.app.url+'?app_data=callback(thanks)ref(tw)')}}"
+<a ng-href="http://twitter.com/share?text=Tweet text will be here&url={{config.app.encodedUrl+'?app_data=callback(thanks)ref(tw)'}}"
    class="share tw" target="_blank" track="['share',{type:'tw',from:'thanks'}]"></a>
 
 <a href="#/home" class="logo"></a>

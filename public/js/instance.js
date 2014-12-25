@@ -32,6 +32,7 @@
     $rootScope = $injector.get('$rootScope');
     
     $rootScope.config = $config;
+    $rootScope.config.app.encodedUrl = encodeURIComponent($config.app.url);
 
     //$rootScope.loginLinkedin = function(){
     //    $rootScope.oauth.loginLinkedin('75apyh2ggqrmjb', 'r_fullprofile').then(
