@@ -29,14 +29,11 @@
     </div>
 </div>
 
-<a class="btn" href="#/entry">take the challenge</a>
+<a class="btn" href="#/entry" ng-click="trackClick('takeTheChallenge')">take the challenge</a>
 
 <div class="notice">
     *after 4 weeks of use<br>
     **When Oral-B Clinical toothpaste, rinse and Oral-B power brush are used together. One thing better at plaque removal is professional cleaning. Individual results may vary.
 </div>
 
-<div class="footer">
-    <a href="#/products">view product range</a>
-    <a class="terms" href="javascript:void(0)" ng-click="popup.show('terms.html',0,{isFocusable:true})">terms and conditions</a>
-</div>
+<div class="footer" ng-include="'/html/desktop/footer.html'"></div>

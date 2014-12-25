@@ -26,6 +26,7 @@
     $agent     = $injector.get('agent'),
     $tools     = $injector.get('tools'),
     $facebook  = $injector.get('facebook'),
+    $location  = $injector.get('$location'),
     $popup     = $injector.get('popup'),
     $timeout   = $injector.get('$timeout'),
     $rootScope = $injector.get('$rootScope');
@@ -94,6 +95,10 @@
             $rootScope.config.app.videoId = $config.app.videoUrl.substr(y + 10);
         }
     }
+
+    $rootScope.trackClick = function(label) {
+        $rootScope.track('click', {label:label,location:$location.path()});
+    };
 
     $rootScope.$on('$routeChangeSuccess', function () {
         $timeout(function() { ($config.fb.isTab || $config.fb.isCanvas) && FB && FB.Canvas.setSize({height:950}); }, 500);

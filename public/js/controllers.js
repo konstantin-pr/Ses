@@ -40,8 +40,8 @@
                 return;
             }
             switch (response.data.data.status) {
-                case 'winner': $location.path('final1'); break;
-                case 'not_a_winner': $location.path('final2'); break;
+                case 'winner': $location.path('final1'); $rootScope.track('submit'); break;
+                case 'not_a_winner': $location.path('final2'); $rootScope.track('submit'); break;
                 case 'already_registered': $location.path('thanks'); break;
             }
         });
