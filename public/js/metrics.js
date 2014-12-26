@@ -67,7 +67,7 @@
         $rootScope.track('video', {provider:data.data.provider, id:data.data.id, action:data.type});
     });
     //Share returns
-    if($config.fb.appDataObject){
+    if($config.fb.appDataObject && $config.fb.appDataObject.callback){
         $rootScope.track('return', {type: $config.fb.appDataObject.ref, from: $config.fb.appDataObject.callback});
     }
 }]);
