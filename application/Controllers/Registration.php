@@ -124,20 +124,17 @@ class Registration
 								'status' => 'already_registered'
 							);
 							JsonResponse::success($res);
-							//$email = trim($request->post('email'));
-							//throw new PublicException("Email address $email is already used.");
+							return;
 						}
 					} else {
 						$ep = $e->getPrevious();
-						//die(var_dump($e->getMessage()));
 						if ($ep && $ep instanceof \PDOException && $ep->getCode() === '23000'){
 							if( preg_match( "/.*Duplicate entry.*/", $ep->getMessage())) {
-								//$email = trim($request->post('email'));
 								$res = array(
 									'status' => 'already_registered'
 								);
 								JsonResponse::success($res);
-								//throw new PublicException ("Email address $email is already used.");
+								return;
 							}
 						}
 					}
