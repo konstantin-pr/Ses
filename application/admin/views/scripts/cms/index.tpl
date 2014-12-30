@@ -4,12 +4,12 @@
                 ondata="selectTab(this);">Winners</a></div>
     </div>
     <div class="lefttab">
-        <div><a href="<?php echo $this->configUrl ?>&type=Export Users" spa="link" target="ContentBox"
+        <div><a href="<?php echo $this->configUrl ?>&type=exportusers" spa="link" target="ContentBox"
                 ondata="selectTab(this);">Export Users</a></div>
     </div>
 
 
-    <div class="container0" id="ContentBox">
+    <div class="container0" id="ContentBox" spa-container="true">
         <?php echo $this->render('winners.tpl'); ?>
     </div>
 

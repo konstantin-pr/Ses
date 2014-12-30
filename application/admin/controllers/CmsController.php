@@ -5,6 +5,7 @@ use Application\models\CopyGenerator;
 use Application\models\ImportData;
 use Application\models\ImportFile;
 
+
 class Admin_CmsController extends Stuzo_Admin_App_Abstract
 {
 
@@ -36,7 +37,7 @@ class Admin_CmsController extends Stuzo_Admin_App_Abstract
 
     function indexAction()
     {
-	$this->winnersAction();
+	   $this->winnersAction();
     }
 
     /**
@@ -162,41 +163,165 @@ class Admin_CmsController extends Stuzo_Admin_App_Abstract
         exit(1);
     }
 
-    /**
-     *
-     */
-    public function generateRandoms(){
-        $url = "https://api.random.org/json-rpc/1/invoke";
-        $data = array (
-            'id' => '7966',
-            'jsonrpc' => '2.0',
-            'method'  => 'generateIntegers',
-            'params'  => array (
-                'apiKey' => '00000000-0000-0000-0000-000000000000',
-                'base'   => '10',
-                'max'    => '1440',
-                'min'    => '0',
-                'n'      => '100',
-                'replacement' => 'true'
-                ));
-        $s = curl_init();
-        curl_setopt($s, CURLOPT_URL, $url);
-        curl_setopt($s, CURLOPT_POST, true);
-        curl_setopt($s, CURLOPT_POSTFIELDS, json_encode($data));
-        $res = curl_getinfo($s,CURLINFO_HTTP_CODE);
-        die(var_dump($res)); 
-    }
 
     /**
      * show winners action
      */
     public function winnersAction()
     {
-    $this->view->gifts = DB::gift()->findAll();
-    //die (print_r($this->view->gifts));
-	//$this->view->winners = array(
-	//    1 => array (1,2,4,5)
-	//);
-	//return "testing output from admin/CmsController/winnerAction!!!n";
+        if (!$this->view->userIsAdmin) throw new Exception("User must be an admin");
+        switch($this->getParam('act')) {
+            case 'generate':
+                try {
+                    $gifts = DB::gift()->findAll();
+                    if (is_array($gifts)  && count($gifts) > 0){
+                        throw new Exception("Random dates are already generated.");
+                    }
+                    //die(print_r($gifts));    
+                    $url = "https://api.random.org/json-rpc/1/invoke";
+                    $data = array (
+                        'id' => '7966',
+                        'jsonrpc' => '2.0',
+                        'method'  => 'generateIntegers',
+                        'params'  => array (
+                            'apiKey' => '00000000-0000-0000-0000-000000000000',
+                            'base'   => '10',
+                            'max'    => '1440',
+                            'min'    => '0',
+                            'n'      => '100',
+                            'replacement' => 'true'
+                            ));
+                    $s = curl_init();
+                    curl_setopt($s, CURLOPT_URL, $url);
+                    curl_setopt($s, CURLOPT_POST, true);
+                    curl_setopt($s, CURLOPT_RETURNTRANSFER, true); 
+                    curl_setopt($s, CURLOPT_POSTFIELDS, json_encode($data));
+                    $res = curl_exec($s);
+                    curl_close($s); 
+                    
+                    if ($res){
+                        $res = json_decode($res, true);
+                    }
+                    else {
+                        throw new Exception("Random data was not receive from random.org, please try again later.");
+                    }
+
+                    $game_start_date = isset($this->getParam('data')['gameStartDate']) ? new \DateTime($this->getParam('data')['gameStartDate']) : null;
+                    if (!$game_start_date){
+                        throw new Exception("Game starting dateshould be provided");        
+                    }
+
+                    
+                    $cur_date = new \DateTime();
+                    if ($game_start_date < $cur_date){
+                        throw new Exception("Game starting date cannot be in the past.");
+                    }
+
+                    if (isset($res['result']['random']['data'])){
+                        $i=0;
+                        foreach ($res['result']['random']['data'] as $rnd) {
+                            $win_date = clone $game_start_date;
+                            date_modify($win_date, '+' . intval($i, 10) . ' day');                    
+                            date_modify($win_date, '+' . $rnd . ' minute');
+                            $gift = new \Entity\Gift($win_date);
+                            DB::gift()->update($gift);
+                            $i = $i + 0.5;
+                        }
+                    }
+                    else{
+                        throw new Exception("Random data was not receive from random.org, please try again later.");
+                    }
+                    return true;
+                }
+                catch (\Exception $e){
+                    $this->view->error = $e->getMessage();
+                }
+                    
+                break;
+        }
+        $this->view->gifts = DB::gift()->findAll();
+    }
+
+   /**
+     * exports users' data
+     */
+    public function exportusersAction(){
+        if (!$this->view->userIsAdmin) throw new Exception("User must be an admin");
+        //die($this->getParam('act'));
+        //die("sdsdsd");
+        switch($this->getParam('act')) {
+            case 'export':
+                //die("EXPORT!!!");
+                try {
+                    $users = DB::user()->findAll();
+                    $csvPath = '/tmp/oralb_' . md5(uniqid() . microtime(TRUE) . mt_rand()) . '.csv';
+
+                    $csvh = fopen($csvPath, 'w');
+                    chmod ($csvPath, 400);
+                    $d = ',';
+                    $e = '"';
+
+                    $csv_header = array(
+                        'firstName', 
+                        'lastName', 
+                        'email', 
+                        'birthDate', 
+                        'tocAccepted', 
+                        'rulesAccepted',
+                        'receiveEmails',
+                        'isWinner',
+                        'dateWin',
+                        'gift' 
+                        );
+                    fputcsv($csvh, $csv_header, $d, $e);                    
+
+                    foreach ($users as $user){
+                        $data = array(
+                            $user['first_name'], 
+                            $user['last_name'], 
+                            $user['email'], 
+                            date_format($user['birth_date'], 'Y-m-d H:i:s'), 
+                            ($user['toc_accepted'] != NULL)   ? 'true' : 'false', 
+                            ($user['rules_accepted'] != NULL) ? 'true' : 'false',
+                            ($user['receive_emails'] != NULL) ? 'true' : 'false',
+                            ($user['is_winner'] != NULL) ? 'true' : 'false',
+                            ($user['date_win'] != NULL) ? date_format($user['date_win'], 'Y-m-d H:i:s') : 'NULL',
+                            ($user['gift'] != NULL) ? $user['gift'] : 'NULL' 
+                            );
+                        fputcsv($csvh, $data, $d, $e);
+                    }
+                    fclose($csvh);
+                    
+                    $csv_file = file_get_contents($csvPath);
+                    header("Content-type: text/csv; charset=utf-8");
+                    //header("Content-type: application/download ");
+                    header("Content-Disposition: attachment; filename=users.csv");
+                    //header("Content-Transfer-Encoding: binary");
+                    header("Content-Length: " . mb_strlen($csv_file));
+                    header("Pragma: no-cache");
+                    header("Expires: 0");
+
+//        header('Content-type: application/json; charset=utf-8');
+//        header('Content-Disposition: attachment;filename=export.json');
+//        header('Cache-Control: max-age=0');
+//        header('Content-Transfer-Encoding: base64');
+
+
+                    //$csv_file = file_get_contents($csvPath);
+                    die($csv_file);
+                    //$outstream = fopen("php://output", "w");       
+                    //while ($res = fgets($csvh)){     
+                    //    fputcsv($outstream, $res);
+                    //}
+                    //fclose($outstream);
+
+                    //fclose($csvh);
+                    //unlink($csvPath);
+                }
+                catch (\Exception $e) {                    
+                    $this->view->error = $e->getMessage();
+                }
+            break;
+        }
     }
 }
